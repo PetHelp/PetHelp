@@ -60,12 +60,8 @@ REST_FRAMEWORK = {
 }
 
 DATABASES = {
-    "default": {
-        "ENGINE": os.getenv("DJANGO_DB_ENGINE"),
-        "HOST": os.getenv("DJANGO_DB_HOST"),
-        "PORT": os.getenv("DJANGO_DB_PORT"),
-        "NAME": os.getenv("DJANGO_DB_NAME"),
-        "USER": os.getenv("DJANGO_DB_USER"),
-        "PASSWORD": os.getenv("DJANGO_DB_PASSWORD"),
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite')
     }
 }
