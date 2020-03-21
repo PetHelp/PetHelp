@@ -12,6 +12,7 @@
         "symfony/yaml": "4.4.*"
     },
     "require-dev": {
+        "symfony/test-pack": "^1.0"
     },
     "config": {
         "preferred-install": {
