@@ -10,3 +10,5 @@ test-reports/*
 !.vscode/settings.json
 !.vscode/launch.json
 *.code-workspace
+
+db.sqlite
