@@ -21,7 +21,7 @@ class Role(models.Model):
 class User(models.Model):
     name = models.CharField(max_length=50)
     email = models.CharField(max_length=50)
-    role = models.ForeignKey(Role, related_name="users", on_delete=models.CASCADE)
+    role = models.ForeignKey(Role, related_name="users", on_delete=models.PROTECT)
     bio = models.CharField(max_length=1024)
     address = models.CharField(max_length=50)
     emergency_contact_email = models.CharField(max_length=150)
