@@ -21,5 +21,3 @@ class OwnerReadWritePermission(IsAuthenticated):
         if not super().has_object_permission(request, view, obj):
             return False
         return obj.user == request.user
-
-
