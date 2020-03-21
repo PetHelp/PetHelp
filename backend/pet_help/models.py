@@ -7,11 +7,46 @@ from enumfields import Enum, EnumField
 
 class AnimalType(Enum):
     DOG = "DOG"
+    CAT = "CAT"
+    TERRARIUM = "TERRARIUM"
+    AQUARIUM = "AQUARIUM"
+    HORSE = "HORSE"
+    BIRD = "BIRD"
+    NAGETIER = "NAGETIER"
+    OTHER = "OTHER"
 
 
 class AnimalTag(Enum):
-    DOG = "DOG"
+    MALE = "MALE"
+    FEMALE = "FEMALE"
+    CASTRATED = "CASTRATED"
+    VERTRÄGLICH_MIT_KATZEN = "VERTRÄGLICH_MIT_KATZEN"
+    VERTRÄGLICH_MIT_HUNDEN = "VERTRÄGLICH_MIT_HUNDEN"
+    VERTRÄGLICH_MIT_KINDERN = "VERTRÄGLICH_MIT_KINDERN"
 
+class DogTag(Enum):
+    GROSS = "GROSS" ## >= 30 kg
+    MITTEL = "MITTEL" ## 10 kg >= hund > 30 kg
+    KLEIN = "KLEIN" ## hund < 10 kg
+    MUZZLE = "MUZZLE"
+    SACHKUNDENACHWEIS2040 = "2040SACHKUNDENACHWEIS"
+    SACHKUNDENACHWEISLISTE = "LISTENHUNDSACHKUNDENACHWEIS"
+
+class CatTag(Enum):
+    FREIGÄNGER = "FREIGÄNGER"
+
+class TerrariumTag(Enum):
+    GIFTIG = "GIFTIG"
+    GRUPPENHALTUNG = "GRUPPENHALTUNG"
+
+class AqariumTag(Enum):
+    GRUPPENHALTUNG = "GRUPPENHALTUNG"
+    SALZWASSER = "SALZWASSER"
+    SÜSSWASSER = "SÜSSWASSER"
+
+class HorseTag(Enum):
+    PONY = "PONY"
+    PFERD = "PFERD"
 
 class HelpType(Enum):
     DOG = "DOG"
