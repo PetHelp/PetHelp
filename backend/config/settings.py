@@ -1,4 +1,5 @@
 import os
+from datetime import timedelta
 
 
 def __find_manage_py_directory():
@@ -34,6 +35,8 @@ USE_TZ = True
 ALLOWED_HOSTS = ["*"]
 CORS_ORIGIN_ALLOW_ALL = True  # FIXME: replace with CORS_ORIGIN_WHITELIST = [frontend-host]
 
+AUTH_USER_MODEL = 'pet_help.User'
+
 # from env
 DEBUG = os.getenv("DJANGO_DEBUG", "false")
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "+2d*2u+s1b=sz9tjv0cacr!bs9+-^)5g+bp0do@ltmfc^1hs!^")
@@ -57,6 +60,7 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.AllowAny"],
     "DEFAULT_RENDERER_CLASSES": ["rest_framework.renderers.JSONRenderer"],
     "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
+    'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework_simplejwt.authentication.JWTAuthentication'],
 }
 
 DATABASES = {
@@ -64,4 +68,11 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite')
     }
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': os.getenv("JWT_SIGNING_KEY", SECRET_KEY),
 }
