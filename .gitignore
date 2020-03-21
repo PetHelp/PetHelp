@@ -34,3 +34,9 @@ Temporary Items
 /backend/var/
 /backend/vendor/
 ###< symfony/framework-bundle ###
+
+###> symfony/phpunit-bridge ###
+/backend/.phpunit
+/backend/.phpunit.result.cache
+/backend/phpunit.xml
+###< symfony/phpunit-bridge ###
