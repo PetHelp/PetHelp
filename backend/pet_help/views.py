@@ -1,3 +1,5 @@
+from uuid import uuid4
+
 from django.db import IntegrityError
 from django.db.models import Q
 from django.http import HttpResponse, JsonResponse
@@ -11,23 +13,6 @@ from pet_help.models import Animal, User, HelpRequest, HelpOffer, Message
 from pet_help.permissions import OwnerReadWritePermission, PublicReadOwnerWritePermission
 from pet_help.serializers import UserSerializer, AnimalSerializer, HelpRequestSerializer, \
     HelpOfferSerializer, MessageSerializer
-
-
-@api_view(http_method_names=["POST"])
-def register(request):
-    name = request.data.get("name")
-    email = request.data.get("email")
-    password = request.data.get("password")
-
-    if email and password and name:
-        try:
-            User.objects.create_user(name, email, password)
-            return HttpResponse(status=201)
-        except IntegrityError:
-            return JsonResponse(dict(email="This email address is already taken"), status=400)
-        except Exception as e:
-            raise e
-    return JsonResponse(dict(info="All fields must be set"), status=400)
 
 
 class UserViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, GenericViewSet):
@@ -75,3 +60,39 @@ class MessageViewSet(mixins.CreateModelMixin,
     def get_queryset(self):
         user = self.request.user
         return Message.objects.filter(Q(sender=user) | Q(receiver=user))
+
+
+@api_view(http_method_names=["POST"])
+def register(request):
+    name = request.data.get("name")
+    email = request.data.get("email")
+    password = request.data.get("password")
+
+    if email and password and name:
+        try:
+            User.objects.create_user(name, email, password)
+            return HttpResponse(status=201)
+        except IntegrityError:
+            return JsonResponse(dict(email="This email address is already taken"), status=400)
+        except Exception as e:
+            raise e
+    return JsonResponse(dict(info="All fields must be set"), status=400)
+
+
+@api_view(http_method_names=["POST"])
+def reset_password(request):
+    email = request.data.get("email")
+    user = User.objects.filter(email=email).first()
+    if email and user:
+        new_password = uuid4()
+        user.set_password(new_password)
+        user.save()
+
+        if request.data.get("send_to_emergency_contact"):
+            pass
+            # TODO: send email with new pw to user.emergency_contact_email
+        else:
+            pass
+            # TODO: send email with new pw to user.email
+        return HttpResponse(status=200)
+    return JsonResponse(dict(email="User not found"), status=400)
