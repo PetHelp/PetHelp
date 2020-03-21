@@ -41,7 +41,7 @@ class User(AbstractUser):
 class Animal(models.Model):
     name = models.CharField(max_length=50)
     type = EnumField(AnimalType, max_length=50)
-    image = models.TextField(blank=True, null=True)
+    image = models.TextField(blank=True, null=True) # FIXME: use FileField in production state
     owner = models.ForeignKey(User, related_name="animals", on_delete=models.CASCADE)
     care_person = models.ForeignKey(User, null=True, blank=True, related_name="cared_animals",
                                     on_delete=models.SET_NULL)
