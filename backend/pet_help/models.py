@@ -22,10 +22,10 @@ class User(models.Model):
     name = models.CharField(max_length=50)
     email = models.CharField(max_length=50)
     role = models.ForeignKey(Role, related_name="users", on_delete=models.CASCADE)
-    bio = models.CharField(max_length=250)
+    bio = models.CharField(max_length=1024)
     address = models.CharField(max_length=50)
-    ice_contact = models.CharField(max_length=150)
-    image = models.CharField(max_length=10000)
+    emergency_contact_email = models.CharField(max_length=150)
+    image = models.TextField()
     registered_at = models.DateField()
     last_login = models.DateField()
     virtual = models.BooleanField(default=False)
@@ -34,7 +34,7 @@ class User(models.Model):
 class Animal(models.Model):
     name = models.CharField(max_length=50)
     type = EnumField(AnimalType, max_length=50)
-    image = models.CharField(max_length=10000)
+    image = models.TextField()
     owner = models.ForeignKey(User, related_name="animals", on_delete=models.CASCADE)
     care_person = models.ForeignKey(User, null=True, blank=True, related_name="cared_animals",
                                     on_delete=models.SET_NULL)
