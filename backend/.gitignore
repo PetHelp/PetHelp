@@ -1,6 +1,12 @@
-
-###> symfony/phpunit-bridge ###
-.phpunit
-.phpunit.result.cache
-/phpunit.xml
-###< symfony/phpunit-bridge ###
+.idea/*
+.pycharm_helpers/*
+__pycache__
+.python-version
+.coverage
+*.pyc
+ci/*
+test-reports/*
+.vscode/*
+!.vscode/settings.json
+!.vscode/launch.json
+*.code-workspace
