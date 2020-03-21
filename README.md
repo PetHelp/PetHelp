@@ -11,7 +11,7 @@ To use the docker image, just do:
 ```bash
 cd backend
 docker build -t pethelp-backend .
-docker run --rm -v ${PWD}:/app pethelp-backend
+docker run -it --rm -v ${PWD}:/app -p 8000:8000 pethelp-backend
 ```
 This will run python3 manage.py runserver
 
