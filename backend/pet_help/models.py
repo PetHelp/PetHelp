@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from enumfields import Enum, EnumField
 
@@ -18,9 +19,9 @@ class Role(models.Model):
     name = models.CharField(max_length=100)
 
 
-class User(models.Model):
+class User(AbstractUser):
     name = models.CharField(max_length=50)
-    email = models.CharField(max_length=50)
+    email = models.CharField(max_length=50, unique=True)
     role = models.ForeignKey(Role, related_name="users", on_delete=models.PROTECT, null=True,
                              blank=True)
     bio = models.CharField(max_length=1024, blank=True, null=True)
@@ -28,8 +29,11 @@ class User(models.Model):
     emergency_contact_email = models.CharField(max_length=150, blank=True, null=True)
     image = models.TextField(blank=True, null=True)
     registered_at = models.DateField(auto_now_add=True)
-    last_login = models.DateField()
+    last_login = models.DateField(null=True, blank=True)
     virtual = models.BooleanField(default=False)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
 
 
 class Animal(models.Model):
