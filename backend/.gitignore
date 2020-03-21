@@ -7,8 +7,6 @@ __pycache__
 ci/*
 test-reports/*
 .vscode/*
-!.vscode/settings.json
-!.vscode/launch.json
 *.code-workspace
 
 db.sqlite
