@@ -8,6 +8,8 @@ Icon
 
 .idea
 
+venv
+
 # Thumbnails
 ._*
 
