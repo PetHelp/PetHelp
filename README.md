@@ -14,15 +14,9 @@ To use the docker image, just do:
 ```bash
 cd backend
 docker build -t pethelp-backend .
-docker run -it --rm -v ${PWD}:/app -p 8000:8000 pethelp-backend
+docker run --rm -p 8000:8000 pethelp-backend
 ```
-This will run python3 manage.py runserver
-
-If you need to do other manage.py commands (e.g. migrate) do:
-
-```bash
-docker run --rm -v ${PWD}:/app pethelp-backend migrate
-```
+This will run gunicorn as production server
 
 ## Frontend
 
