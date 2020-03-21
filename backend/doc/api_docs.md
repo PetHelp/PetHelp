@@ -10,9 +10,10 @@ Das Token muss im  Authorization-Header mit dem Prefix "Bearer " gesendet werden
 * [Login](token/post.md): `POST /token/`
 
 ## Animals
-- endpoint: /featured-animals/
+- endpoint: /featured-animals/ 
 - payload {}
 - response: [{name: "Gamma", location: "Hamburg", emergency: true}, ...]
+Dieser Endpoint kann auch nicht authentifiziert genutzt werden.
 
 - endpoint: GET /animals/
 - payload {filter?}
@@ -30,6 +31,7 @@ Das Token muss im  Authorization-Header mit dem Prefix "Bearer " gesendet werden
 - endpoint: /featured-help-offers/
 - payload {}
 - response: [{id: 1, name: "Kathi König", location: "Hamburg", teaser: "Hier steht etwas über sie\nHier steht noch mehr über sie"}]
+Dieser Endpoint kann auch nicht authentifiziert genutzt werden.
 
 - endpoint: GET /help-offers/
 - payload {}
