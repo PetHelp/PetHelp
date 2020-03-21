@@ -3,18 +3,11 @@
 Die regulären Endpunkte können nur authentifiziert genutzt weden.
 Das Token muss im  Authorization-Header mit dem Prefix "Bearer " gesendet werden.
 
-## Register user
-- endpoint: /register/
-- payload: {name: "name", email: "email@test.de", password: "secret"}
+## Login
 
-## Reset password
-- endpoint: /reset-password
-- payload: {email: "email@test.de"}
-
-## Login/Get Token
-- endpoint: /token
-- payload: {email: "email@test.de", password: "secret}
-- response: {access: access_token, refresh: refresh_token}
+* [Register](register/post.md): `POST /register/`
+* [Reset password](reset-password/post.md): `POST /reset-password/`
+* [Login](token/post.md): `POST /token/`
 
 ## Animals
 - endpoint: /animals/
