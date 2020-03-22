@@ -40,6 +40,11 @@ AUTH_USER_MODEL = 'pet_help.User'
 # from env
 DEBUG = os.getenv("DJANGO_DEBUG", "false")
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "+2d*2u+s1b=sz9tjv0cacr!bs9+-^)5g+bp0do@ltmfc^1hs!^")
+MAP_QUEST_API_KEY = os.getenv("MAP_QUEST_API_KEY", "")
+MAP_QUEST_GEOCODING_URL = "https://www.mapquestapi.com/geocoding/v1/address"
+
+# OSM
+OSM_GEOCODING_URL = "https://nominatim.openstreetmap.org/search"
 
 INSTALLED_APPS = [
     "django.contrib.auth",
