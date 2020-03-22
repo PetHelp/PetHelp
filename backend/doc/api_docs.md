@@ -7,7 +7,7 @@ Das Token muss im  Authorization-Header mit dem Prefix "Bearer " gesendet werden
 ## Register user
 - endpoint: /register/
 - method: POST
-- payload: {name: "name", email: "email@test.de", password: "secret"}
+- payload: {email: "email@test.de", password: "secret"}
 - success: 201
 - error: 400
 

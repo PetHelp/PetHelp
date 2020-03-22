@@ -8,7 +8,6 @@
 
 ```json
 {
-    "name": "name",
     "email": "email@test.de",
     "password": "secret"
 }

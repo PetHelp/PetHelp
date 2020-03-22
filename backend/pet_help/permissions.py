@@ -1,16 +1,21 @@
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, BasePermission
 
 
-class PublicReadOwnerWritePermission(IsAuthenticated):
+class PublicReadOwnerWritePermission(BasePermission):
     def has_permission(self, request, view):
-        return super().has_permission(request, view)
+        if request.method == "GET":
+            return super().has_permission(request, view)
+        return request.user and request.user.is_authenticated
 
     def has_object_permission(self, request, view, obj):
         if not super().has_object_permission(request, view, obj):
             return False
         if request.method == "GET":
             return True
-        return obj.user == request.user
+        
+        if request.user and request.user.is_authenticated:
+            return obj.user == request.user
+        return False
 
 
 class OwnerReadWritePermission(IsAuthenticated):

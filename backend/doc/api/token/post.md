@@ -1,6 +1,6 @@
 # Login User
 
-**URL**: `/register/`  
+**URL**: `/token/`  
 **Method**: `POST`  
 **Auth required**: NO  
 
