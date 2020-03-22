@@ -1,35 +1,22 @@
 <template>
   <div class="Page">
-    <div class="container my-5 px-0 z-depth-1">
+    <div class="container-fluid my-5 px-0 z-depth-1">
+      <div class="hero">
+        <img class="hero__image" src="../assets/Images/pethelp-header.png" alt="" />
+        <div class="hero__text">
+          <h2>Bereits 20.189 gefundene Pfleegestellen!</h2>
+          <p class="mt-4">Hast du ein Tier, dass schnellst möglich durch Eintritt einer Krankheit oder Quarantäne in gute Hände zur Pflege gegeben werden muss oder du brauchst jemand der sich
+            stationär um deine Tiere kümmert?</p>
+          <p> Dann bist du bei UNS genau richtig!</p>
 
-  <!--Section: Content-->
-  <section class="text-center white-text grey p-5"
-    style="background-image: url(https://mdbootstrap.com/img/Photos/Others/background.jpg);">
-
-    <!--Grid row-->
-    <div class="row d-flex justify-content-center">
-
-      <!--Grid column-->
-      <div class="col-md-10">
-
-          <h3 class="font-weight-bold">Bereits 20.189 gefundene Pfleegestellen!</h3>
-
-          <p>Hast du ein Tier, dass schnellst möglich durch Eintritt einer Krankheit oder Quarantäne in gute Hände zur Pflege gegeben werden muss oder du brauchst jemand der sich
-            stationär um deine Tiere kümmert? Dann bist du bei UNS genau richtig! </p>
-
-          <button type="button" class="btn btn-secondary" style="margin: 0px 100px 0px 0px">Ich suche Hilfe</button>
-          <button type="button" class="btn btn-secondary">Ich biete Hilfe</button>
-
+          <div class="here__actions mt-5">
+            <button type="button" class="btn btn-primary btn-lg btn-light mr-4 px-4 py-2"><b>Ich suche Hilfe</b></button>
+            <button type="button" class="btn btn-primary btn-lg btn-light px-4 py-2"><b>Ich biete Hilfe</b></button>
+          </div>
+        </div>
       </div>
-      <!--Grid column-->
-
     </div>
-    <!--Grid row-->
 
-  </section>
-  <!--Section: Content-->
-
-</div>
     <div class="container pt-5 my-5 z-depth-1 ">
   <section class="p-md-3 mx-md-5 text-center">
     <h2 class="text-center mx-auto font-weight-bold mb-4 pb-2">7.651 Tiere brauchen deine Hilfe</h2>
@@ -327,6 +314,29 @@ export default {
 </script>
 
 <style scoped>
+  img {
+    max-width: 100%;
+  }
+
+  .hero {
+    position: relative;
+    color: white;
+    background-color: #2c4e57;
+  }
+
+  .hero__image {
+    margin-bottom: -7em;
+  }
+
+  .hero__text {
+    position: absolute;
+    top: 4em;
+    left: 3em;
+    width: 50%;
+    line-height: 1.5;
+    font-size: 1.15em;
+  }
+
   .Bereich {
 border-color: gray;
 border-width: 2px;
