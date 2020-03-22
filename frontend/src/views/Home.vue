@@ -1,5 +1,5 @@
 <template>
-  <div class="Page">
+  <div class="page">
     <div class="container-fluid my-5 px-0 z-depth-1">
       <div class="hero">
         <img class="hero__image" src="../assets/Images/pethelp-header.png" alt="" />
@@ -17,186 +17,21 @@
       </div>
     </div>
 
+    <!-- PETS -->
     <div class="container pt-5 my-5 z-depth-1 ">
-  <section class="p-md-3 mx-md-5 text-center">
-    <h2 class="text-center mx-auto font-weight-bold mb-4 pb-2">7.651 Tiere brauchen deine Hilfe</h2>
-    <div class="row Bereich">
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-        <div class="p-4">
-          <div
-            class="avatar w-100 white d-flex justify-content-center align-items-center"
-          >
-            <img
-              src="../assets/Images/Hund1.png"
-              class="img-fluid rounded-circle z-depth-1"
-            />
-          </div>
-          <div class="text-center mt-3">
-            <h6 class="font-weight-bold pt-2">Steve</h6>
-            <p class="text-muted">
-              <small>
-                <i>3 Jahre, sehr unkompliziert.</i>
-                </small>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-        <div class="p-4">
-          <div
-            class="avatar w-100 white d-flex justify-content-center align-items-center"
-          >
-            <img
-              src="../assets/Images/Hund2.png"
-              class="img-fluid rounded-circle z-depth-1"
-            />
-          </div>
-          <div class="text-center mt-3">
-            <h6 class="font-weight-bold pt-2">Tom</h6>
-            <p class="text-muted">
-              <small
-                ><i
-                  >2 Jahre, Vegan, liebt Spielzeug</i
-                ></small
-              >
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-        <div class="p-4">
-          <div
-            class="avatar w-100 white d-flex justify-content-center align-items-center"
-          >
-            <img
-              src="../assets/Images/Hund3.jpg"
-              class="img-fluid rounded-circle z-depth-1"
-            />
-          </div>
-          <div class="text-center mt-3">
-            <h6 class="font-weight-bold pt-2">Alex Laurie</h6>
-            <p class="text-muted">
-              <small
-                ><i
-                  >5 und 4 Jahre, Nur zusammen abzugeben.</i
-                ></small
-              >
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-        <div class="p-4">
-          <div
-            class="avatar w-100 white d-flex justify-content-center align-items-center"
-          >
-            <img
-              src="../assets/Images/Hund4.jpg"
-              class="img-fluid rounded-circle z-depth-1"
-            />
-          </div>
-          <div class="text-center mt-3">
-            <h6 class="font-weight-bold pt-2">Nathalie</h6>
-            <p class="text-muted">
-              <small
-                ><i
-                  >1 Jahr, braucht besondere Betreuung.</i
-                ></small
-              >
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-        <div class="p-4">
-          <div
-            class="avatar w-100 white d-flex justify-content-center align-items-center"
-          >
-            <img
-              src="../assets/Images/Hund5.jpg"
-              class="img-fluid rounded-circle z-depth-1"
-            />
-          </div>
-          <div class="text-center mt-3">
-            <h6 class="font-weight-bold pt-2">Emi</h6>
-            <p class="text-muted">
-              <small
-                ><i
-                  >4 Jahre, sehr aktiv</i
-                ></small
-              >
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-        <div class="p-4">
-          <div
-            class="avatar w-100 white d-flex justify-content-center align-items-center"
-          >
-            <img
-              src="../assets/Images/Hund6.jpg"
-              class="img-fluid rounded-circle z-depth-1"
-            />
-          </div>
-          <div class="text-center mt-3">
-            <h6 class="font-weight-bold pt-2">Lisi</h6>
-            <p class="text-muted">
-              <small
-                ><i
-                  >3 Jahre, sehr ruhig</i
-                ></small
-              >
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-        <div class="p-4">
-          <div
-            class="avatar w-100 white d-flex justify-content-center align-items-center"
-          >
-            <img
-              src="../assets/Images/Hund7.jpg"
-              class="img-fluid rounded-circle z-depth-1"
-            />
-          </div>
-          <div class="text-center mt-3">
-            <h6 class="font-weight-bold pt-2">Billy</h6>
-            <p class="text-muted">
-              <small
-                ><i
-                  >4 Jahre, sehr laut</i
-                ></small
-              >
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-        <div class="p-4">
-          <div
-            class="avatar w-100 white d-flex justify-content-center align-items-center"
-          >
-            <img
-              src="../assets/Images/Hund8.jpg"
-              class="img-fluid rounded-circle z-depth-1"
-            />
-          </div>
-          <div class="text-center mt-3">
-            <h6 class="font-weight-bold pt-2">Sinchen</h6>
-            <p class="text-muted">
-              <small
-                ><i
-                  >7 Jahre, absoluter Familienhund</i
-                ></small
-              >
-            </p>
-          </div>
-        </div>
-      </div>
-      <button type="button" class="btn btn-primary">Mehr anzeigen...</button>
-    </div>
+    <section class="p-md-3 mx-md-5 text-center">
+      <h2 class="text-center mx-auto font-weight-bold mb-4 pb-2">7.651 Tiere brauchen deine Hilfe</h2>
+      <b-row class="mt-3">
+        <b-col
+          cols="3"
+          v-for="animal in animals"
+          v-bind:key="animal.id"
+          class="mt-5"
+        >
+          <Animal v-bind:animal="animal"></Animal>
+        </b-col>
+      </b-row>
+      <button type="button" class="btn btn-outline px-4 py-2 mt-5">Mehr anzeigen</button>
   </section>
 </div>
 
@@ -308,8 +143,24 @@
 </template>
 
 <script>
+import Animal from '../components/Animal.vue'
+
 export default {
-  name: 'Home'
+  components: { Animal },
+  data: function () {
+    return {
+      animals: [
+        { id: 1, name: 'Nico', age: 10, img: 'Hund1.png', hometown: 'Bonn' },
+        { id: 2, name: 'Sumo', age: 2, img: 'Hund2.png', hometown: 'Berlin' },
+        { id: 3, name: 'T-Rex', age: 5, img: 'Hund3.jpg', hometown: 'Heinsberg' },
+        { id: 4, name: 'Hope', age: 3, img: 'Hund4.jpg', hometown: 'Würzburg' },
+        { id: 5, name: 'Rufus', age: 1, img: 'Hund5.jpg', hometown: 'Hannover' },
+        { id: 6, name: 'Terence', age: 8, img: 'Hund6.jpg', hometown: 'München' },
+        { id: 7, name: 'Bud', age: 13, img: 'Hund7.jpg', hometown: 'Heinsberg' },
+        { id: 8, name: 'Lily', age: 13, img: 'Hund8.jpg', hometown: 'Heinsberg' }
+      ]
+    }
+  }
 }
 </script>
 
@@ -337,19 +188,13 @@ export default {
     font-size: 1.15em;
   }
 
-  .Bereich {
-border-color: gray;
-border-width: 2px;
-border-style: inset;
-border-radius: 10px;
-background-color:whitesmoke;
-            }
+  .btn-outline {
+    border: 2px solid #2c4e57;
+    border-radius: 10px;
+    font-weight: bold;
+  }
 
-  .ContactButton{
-    font-size: 12px
-      }
-
-  .Page{
-      background-color: #e3e3e3;
-        }
+  .page {
+      background-color: #fefefe;
+  }
 </style>
