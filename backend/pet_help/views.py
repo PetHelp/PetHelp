@@ -18,7 +18,8 @@ from pet_help.serializers import UserSerializer, AnimalSerializer, HelpRequestSe
     HelpOfferSerializer, MessageSerializer
 
 
-class UserViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, GenericViewSet):
+class UserViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, mixins.UpdateModelMixin,
+                  GenericViewSet):
     serializer_class = UserSerializer
     permission_classes = (IsAuthenticated,)
     queryset = User.objects.all()
