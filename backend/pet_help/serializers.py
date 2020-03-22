@@ -34,6 +34,10 @@ class AnimalSerializer(EnumFieldSerializerMixin, serializers.ModelSerializer):
         exclude = ()
         read_only_fields = ('id', 'owner', 'current_address_lat', 'current_address_lng')
 
+    def create(self, validated_data):
+        validated_data["owner"] = self.context["request"].user
+        return super().create(validated_data)
+
     def update(self, instance, validated_data):
         if "current_address" in validated_data and validated_data.get("current_address") != instance.current_address:
             updated_instance = super().update(self, instance, validated_data)
