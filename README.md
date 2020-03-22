@@ -29,3 +29,16 @@ cd frontend
 docker build -t pethelp-frontend .
 docker run --rm -p 8080:80 pethelp-frontend
 ```
+
+## Deployment with docker-compose
+First copy env.example to .env
+```bash
+cp env.example .env
+```
+Edit .env and set your preferred settings
+
+Next compile and run:
+```bash
+docker-compose build
+docker-compose up -d
+```
