@@ -48,7 +48,7 @@
                 <b-col cols="3" class="pb-5">
                   <ul>
                     <li><router-link to="/hilfe-suchen">Hilfe suchen</router-link></li>
-                    <li><a href="#">Hilfe anbieten</a></li>
+                    <li><router-link to="/hilfe-anbieten">Hilfe anbieten</router-link></li>
                     <li><a href="#">Guideline</a></li>
                     <li><a href="#">FAQ</a></li>
                   </ul>
