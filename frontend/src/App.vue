@@ -1,14 +1,30 @@
 <template>
   <div id="app" class="container-fluid">
-    <div id="nav">
+    <div id="nav" class="py-4 text-center container">
       <b-row align-h="center">
-            <b-col align-self="center"><img src="http://via.placeholder.com/100x100"></b-col>
-            <b-col align-self="center"><router-link to="/">Home</router-link></b-col>
-            <b-col align-self="center"><router-link to="/hilfe-suchen">Hilfe suchen</router-link></b-col>
-            <b-col align-self="center"><router-link to="/hilfe-anbieten">Hilfe anbieten</router-link></b-col>
-            <b-col align-self="center"><router-link to="/guideline">Guideline</router-link></b-col>
-            <b-col align-self="center"><router-link to="/faq">FAQ</router-link></b-col>
-            <b-col align-self="center"><router-link to="/profil"><img style="width:50px" src="https://cdn2.iconfinder.com/data/icons/facebook-51/32/FACEBOOK_LINE-01-512.png"></router-link></b-col>
+        <b-col cols="10">
+          <div class="d-flex align-items-center">
+            <img src="http://via.placeholder.com/150x50">
+            <router-link class="ml-5" to="/">Home</router-link>
+            <router-link class="ml-5" to="/hilfe-suchen">Hilfe suchen</router-link>
+            <router-link class="ml-5" to="/hilfe-anbieten">Hilfe anbieten</router-link>
+            <router-link class="ml-5" to="/guideline">Guideline</router-link>
+            <router-link class="ml-5" to="/faq">FAQ</router-link>
+          </div>
+          <b-row>
+
+          </b-row>
+        </b-col>
+        <b-col cols="2" align-self="center">
+          <router-link to="/profil">
+            <div class="d-flex align-items-center justify-content-end">
+              <span class="pl-3" style="white-space: nowrap;">Corinna</span>
+              <div class="ml-3" style="min-width: 3em;">
+                <Avatar img="Mensch3.jpg" />
+              </div>
+            </div>
+          </router-link>
+        </b-col>
       </b-row>
     </div>
      <b-row>
@@ -31,7 +47,7 @@
                 </b-col>
                 <b-col cols="3" class="pb-5">
                   <ul>
-                    <li><a href="#">Hilfe suchen</a></li>
+                    <li><router-link to="/hilfe-suchen">Hilfe suchen</router-link></li>
                     <li><a href="#">Hilfe anbieten</a></li>
                     <li><a href="#">Guideline</a></li>
                     <li><a href="#">FAQ</a></li>
@@ -88,18 +104,21 @@
   color: #2c3e50;
 }
 
-#nav {
-  padding: 30px;
-  text-align: center;
-}
-
 #nav a {
   font-weight: bold;
   color: #2c3e50;
 }
 
+#nav a:hover,
+#nav a:focus {
+  text-decoration: none;
+  border-bottom: 1px solid #2c4e57;
+}
+
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: #2c4e57;
+  font-weight: bold;
+  border-bottom: 2px solid #2c4e57;
 }
 
 footer {
@@ -125,3 +144,10 @@ footer a svg {
   width: 2rem;
 }
 </style>
+<script>
+import Avatar from '@/components/Avatar.vue'
+
+export default {
+  components: { Avatar }
+}
+</script>
