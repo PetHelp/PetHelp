@@ -10,7 +10,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 
 from pet_help.filters import HelpOfferFilterSet, HelpRequestFilterSet, MessageFilterSet
-from pet_help.models import Animal, User, HelpRequest, HelpOffer, Message
+from pet_help.models import Animal, User, HelpRequest, HelpOffer, Message, AnimalType, HelpType
 from pet_help.permissions import OwnerReadWritePermission, PublicReadOwnerWritePermission
 from pet_help.serializers import UserSerializer, AnimalSerializer, HelpRequestSerializer, \
     HelpOfferSerializer, MessageSerializer
@@ -68,6 +68,18 @@ class MessageViewSet(mixins.CreateModelMixin,
     def get_queryset(self):
         user = self.request.user
         return Message.objects.filter(Q(sender=user) | Q(receiver=user))
+
+
+@api_view(http_method_names=["GET"])
+def list_animal_types(request):
+    animal_types = [animal_type.value for animal_type in AnimalType]
+    return JsonResponse(animal_types, status=200, safe=False)
+
+
+@api_view(http_method_names=["GET"])
+def list_help_types(request):
+    help_types = [help_type.value for help_type in HelpType]
+    return JsonResponse(help_types, status=200, safe=False)
 
 
 @api_view(http_method_names=["POST"])

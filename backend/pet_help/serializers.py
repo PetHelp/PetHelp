@@ -33,7 +33,21 @@ class AnimalSerializer(EnumFieldSerializerMixin, serializers.ModelSerializer):
         return super().create(validated_data)
 
 
+class ReducedAnimalSerializer(EnumFieldSerializerMixin, serializers.ModelSerializer):
+    class Meta:
+        model = Animal
+        exclude = ('id', 'owner', 'care_person', 'current_address')
+
+    def create(self, validated_data):
+        raise NotImplementedError()
+
+    def update(self, instance, validated_data):
+        raise NotImplementedError()
+
+
 class HelpRequestSerializer(EnumFieldSerializerMixin, serializers.ModelSerializer):
+    animals = ReducedAnimalSerializer(many=True)
+
     class Meta:
         model = HelpRequest
         exclude = ()

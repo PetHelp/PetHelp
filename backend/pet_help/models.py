@@ -24,6 +24,7 @@ class AnimalTag(Enum):
     VERTRÄGLICH_MIT_HUNDEN = "VERTRÄGLICH_MIT_HUNDEN"
     VERTRÄGLICH_MIT_KINDERN = "VERTRÄGLICH_MIT_KINDERN"
 
+
 class DogTag(Enum):
     GROSS = "GROSS" ## >= 30 kg
     MITTEL = "MITTEL" ## 10 kg >= hund > 30 kg
@@ -32,24 +33,31 @@ class DogTag(Enum):
     SACHKUNDENACHWEIS2040 = "2040SACHKUNDENACHWEIS"
     SACHKUNDENACHWEISLISTE = "LISTENHUNDSACHKUNDENACHWEIS"
 
+
 class CatTag(Enum):
     FREIGÄNGER = "FREIGÄNGER"
+
 
 class TerrariumTag(Enum):
     GIFTIG = "GIFTIG"
     GRUPPENHALTUNG = "GRUPPENHALTUNG"
+
 
 class AqariumTag(Enum):
     GRUPPENHALTUNG = "GRUPPENHALTUNG"
     SALZWASSER = "SALZWASSER"
     SÜSSWASSER = "SÜSSWASSER"
 
+
 class HorseTag(Enum):
     PONY = "PONY"
     PFERD = "PFERD"
 
+
 class HelpType(Enum):
-    DOG = "DOG"
+    GASSI_GEHEN = "GASSI_GEHEN"
+    FUTTER_KAUFEN = "FUTTER_KAUFEN"
+    HEIMBETREUUNG = "HEIMBETREUUNG"
 
 
 class Role(models.Model):
@@ -90,7 +98,7 @@ class HelpRequest(models.Model):
     type = EnumField(HelpType, max_length=20)
     description = models.CharField(max_length=1024)
     active = models.BooleanField(default=True)
-    animals = models.ManyToManyField(Animal, related_name="animals")
+    animals = models.ManyToManyField(Animal, related_name="requests")
 
 
 class HelpOffer(models.Model):
