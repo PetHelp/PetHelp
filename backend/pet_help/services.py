@@ -15,5 +15,7 @@ def resolve_geo_for_animal(animal_instance):
 
 
 def get_geo_coordinates_for_address(address_string):
+    if not address_string:
+        return dict(lat=None, lng=None)
     # TODO: add geocoding api call here
     return dict(lat=None, lng=None)

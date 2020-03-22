@@ -21,11 +21,11 @@ class UserSerializer(EnumFieldSerializerMixin, serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         if "address" in validated_data and validated_data.get("address") != instance.address:
-            updated_instance = super().update(self, instance, validated_data)
+            updated_instance = super().update(instance, validated_data)
             updated_instance = services.resolve_geo_for_user(updated_instance)
             return updated_instance
         else:
-            return super().update(self, instance, validated_data)
+            return super().update(instance, validated_data)
 
 
 class AnimalSerializer(EnumFieldSerializerMixin, serializers.ModelSerializer):
@@ -36,15 +36,18 @@ class AnimalSerializer(EnumFieldSerializerMixin, serializers.ModelSerializer):
 
     def create(self, validated_data):
         validated_data["owner"] = self.context["request"].user
-        return super().create(validated_data)
+        instance = super().create(validated_data)
+        instance = services.resolve_geo_for_animal(instance)
+        return instance
 
     def update(self, instance, validated_data):
-        if "current_address" in validated_data and validated_data.get("current_address") != instance.current_address:
-            updated_instance = super().update(self, instance, validated_data)
+        if "current_address" in validated_data and \
+                validated_data.get("current_address") != instance.current_address:
+            updated_instance = super().update(instance, validated_data)
             updated_instance = services.resolve_geo_for_animal(updated_instance)
             return updated_instance
         else:
-            return super().update(self, instance, validated_data)
+            return super().update(instance, validated_data)
 
 
 class ReducedAnimalSerializer(EnumFieldSerializerMixin, serializers.ModelSerializer):
