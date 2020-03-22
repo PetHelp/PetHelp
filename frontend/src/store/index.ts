@@ -5,6 +5,13 @@ import axios from '../axios'
 
 Vue.use(Vuex)
 
+const messageOptions = {
+  timeout: 10000,
+  important: true,
+  clickable: true,
+  autoEmit: true
+}
+
 export default new Vuex.Store({
   state: {
     token: {
@@ -41,10 +48,12 @@ export default new Vuex.Store({
         password: authData.password
       })
         .then(res => {
-          console.log(res)
           dispatch('login', { email: authData.email, password: authData.password })
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+          Vue.prototype.$flashStorage.flash('Die E-Mail-Adresse ist bereits vergeben', 'error', messageOptions)
+          console.log(error)
+        })
     },
     login ({ commit }, authData) {
       axios.post('/token/', {
@@ -52,22 +61,25 @@ export default new Vuex.Store({
         password: authData.password
       })
         .then(res => {
-          console.log(res)
           commit('authUser', {
             refreshToken: res.data.refresh,
             accessToken: res.data.access
           })
           localStorage.setItem('refreshToken', res.data.refresh)
           localStorage.setItem('accessToken', res.data.access)
-          //flash('Du wurdest erfolgreich angemeldet', 'success')
+          Vue.prototype.$flashStorage.flash('Du wurdest erfolgreich angemeldet', 'success', messageOptions)
           router.replace('/profil')
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+          Vue.prototype.$flashStorage.flash('Deine eingegebenen Anmeldedaten sind nicht korrekt', 'error', messageOptions)
+          console.log(error)
+        })
     },
     logout ({ commit }) {
       commit('clearAuthData')
       localStorage.removeItem('refreshToken')
       localStorage.removeItem('accessToken')
+      Vue.prototype.$flashStorage.flash('Du wurdest erfolgreich abgemeldet', 'success', messageOptions)
       router.replace('/')
     },
     getProfile ({ commit }) {

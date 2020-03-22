@@ -122,6 +122,16 @@
   border-bottom: 2px solid #2c4e57;
 }
 
+.flash__wrapper {
+  position: fixed;
+  z-index: 1000;
+  width: 95vw;
+  margin: 0% auto;
+  left: 0;
+  right: 0;
+  bottom: 1em;
+}
+
 footer {
   background: #2c4e57;
 }
