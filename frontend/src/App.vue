@@ -12,9 +12,7 @@
       </b-row>
     </div>
      <b-row>
-      <b-col>
         <router-view/>
-      </b-col>
     </b-row>
 
     <b-row>
