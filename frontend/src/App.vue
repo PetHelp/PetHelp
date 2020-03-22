@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="container-fluid">
     <div id="nav">
       <b-row align-h="center">
             <b-col align-self="center"><img src="http://via.placeholder.com/100x100"></b-col>
