@@ -15,6 +15,7 @@ djangorestframework = "==3.11.0"
 drf-enum-field = "==0.9.3"
 Django = "==3.0.4"
 djangorestframework-simplejwt = "*"
+requests = "*"
 
 [requires]
 python_version = "3.8"
