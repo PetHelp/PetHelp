@@ -10,16 +10,31 @@ export default new Vuex.Store({
     token: {
       refresh: null,
       access: null
+    },
+    profile: {
+      id: null,
+      name: null,
+      bio: null,
+      address: null,
+      emergencyContactEmail: null,
+      animals: {}
     }
   },
   mutations: {
     authUser (state, token) {
       state.token.refresh = token.refresh
       state.token.access = token.access
+    },
+    storeProfile (state, profile) {
+      state.profile.id = profile.id
+      state.profile.name = profile.name
+      state.profile.bio = profile.bio
+      state.profile.address = profile.address
+      state.profile.emergencyContactEmail = profile.emergencyContactEmail
     }
   },
   actions: {
-    register ({ commit, dispatch }, authData) {
+    register ({ dispatch }, authData) {
       axios.post('/register/', {
         name: authData.name,
         email: authData.email,
@@ -31,7 +46,7 @@ export default new Vuex.Store({
         })
         .catch(error => console.log(error))
     },
-    login ({ commit, dispatch }, authData) {
+    login ({ commit }, authData) {
       axios.post('/token/', {
         email: authData.email,
         password: authData.password
@@ -53,6 +68,38 @@ export default new Vuex.Store({
       localStorage.removeItem('refreshToken')
       localStorage.removeItem('accessToken')
       router.replace('/')
+    },
+    getProfile ({ commit }) {
+      axios.get('/users/')
+        .then(res => {
+          console.log(res)
+          commit('storeProfile', {
+            id: res.data[0].id,
+            name: res.data[0].name,
+            bio: res.data[0].bio,
+            address: res.data[0].address,
+            emergencyContactEmail: res.data[0].emergencyContactEmail
+          })
+        })
+        .catch(error => console.log(error))
+    },
+    updateProfile ({ commit }, profile) {
+      axios.patch(`/users/${profile.id}/`, {
+        name: profile.name,
+        bio: profile.bio,
+        address: profile.address,
+        emergencyContactEmail: profile.emergencyContactEmail
+      })
+        .then(res => {
+          console.log(res)
+          commit('storeProfile', {
+            name: profile.name,
+            bio: profile.bio,
+            address: profile.address,
+            emergencyContactEmail: profile.emergencyContactEmail
+          })
+        })
+        .catch(error => console.log(error))
     }
   },
   modules: {
