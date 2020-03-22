@@ -4,7 +4,7 @@
       <b-row align-h="center">
         <b-col cols="10">
           <div class="d-flex align-items-center">
-            <img src="http://via.placeholder.com/150x50">
+            <img src="./assets/Images/Logo-quarantiere.png" alt="" style="width: 200px;">
             <router-link class="ml-5" to="/">Home</router-link>
             <router-link class="ml-5" to="/hilfe-suchen">Hilfe suchen</router-link>
             <router-link class="ml-5" to="/hilfe-anbieten">Hilfe anbieten</router-link>
