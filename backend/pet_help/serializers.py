@@ -10,7 +10,8 @@ class UserSerializer(EnumFieldSerializerMixin, serializers.ModelSerializer):
     class Meta:
         model = User
         exclude = ('id', 'password', 'role', 'virtual', 'first_name', 'last_name', 'is_staff',
-                   'groups', 'user_permissions', 'is_superuser', 'date_joined', 'is_active')
+                   'groups', 'user_permissions', 'is_superuser', 'date_joined', 'is_active',
+                   'username')
         read_only_fields = ('address_lat', 'address_lng')
 
     def validate(self, attrs):
