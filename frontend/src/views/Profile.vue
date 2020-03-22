@@ -52,13 +52,13 @@ export default {
     return {
       user: {
         name: 'Corinna Quarantina',
-        img: 'https://mdbootstrap.com/img/Photos/Avatars/img%20(2).jpg',
+        img: 'Mensch3.jpg',
         hometown: 'Berlin',
         phone: '(0179) 200 33 66',
         experience: 'Spicy jalapeno cow ribeye drumstick meatloaf. Meatball t-bone ham spare ribs, short ribs ball tip alcatra leberkas ham hock chislic landjaeger. Brisket bresaola venison, buffalo ball tip beef pastrami meatball shank flank. Pork chop leberkas frankfurter short loin chislic tenderloin drumstick pastrami kevin pork loin tail jowl pig.',
         animals: [
-          { id: 1, name: 'T-Rex', age: 6, img: 'https://placekitten.com/400/400' },
-          { id: 2, name: 'Sumo', age: 2, img: 'https://placedog.net/400/400' }
+          { id: 1, name: 'T-Rex', age: 6, img: 'Hund3.jpg' },
+          { id: 2, name: 'Sumo', age: 2, img: 'Hund2.png' }
         ]
       }
     }
