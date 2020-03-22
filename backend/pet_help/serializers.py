@@ -16,6 +16,7 @@ class UserSerializer(EnumFieldSerializerMixin, serializers.ModelSerializer):
 
     def validate(self, attrs):
         attrs.pop("password", None)
+        return attrs
 
     def create(self, validated_data):
         raise NotImplementedError()

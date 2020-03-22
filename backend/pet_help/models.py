@@ -78,6 +78,8 @@ class User(AbstractUser):
     registered_at = models.DateField(auto_now_add=True)
     last_login = models.DateField(null=True, blank=True)
     virtual = models.BooleanField(default=False)
+    email_verified = models.BooleanField(default=True)
+    # FIXME: change default of email_verified to False and implement email verification
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
