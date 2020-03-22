@@ -44,6 +44,7 @@ export default new Vuex.Store({
           })
           localStorage.setItem('refreshToken', res.data.refresh)
           localStorage.setItem('accessToken', res.data.access)
+          //flash('Du wurdest erfolgreich angemeldet', 'success')
           router.replace('/profil')
         })
         .catch(error => console.log(error))
