@@ -6,7 +6,7 @@ import axios from '../axios'
 Vue.use(Vuex)
 
 const messageOptions = {
-  timeout: 10000,
+  timeout: 8000,
   important: true,
   clickable: true,
   autoEmit: true

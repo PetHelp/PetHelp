@@ -34,16 +34,28 @@ const routes = [
     path: '/profil',
     name: 'profile',
     component: () => import(/* webpackChunkName: "profil" */ '../views/Profile.vue')
+    /* beforeEnter: (to, from, next) => {
+      if (false) next({ name: 'login' }) // loggedout
+      else next()
+    } */
   },
   {
     path: '/login',
     name: 'login',
     component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue')
+    /* beforeEnter: (to, from, next) => {
+      if (false) next({ name: 'profile' }) // loggedin
+      else next()
+    } */
   },
   {
     path: '/register',
     name: 'register',
     component: () => import(/* webpackChunkName: "register" */ '../views/Register.vue')
+    /* beforeEnter: (to, from, next) => {
+      if (false) next({ name: 'profile' }) // logedin
+      else next()
+    } */
   }
 ]
 

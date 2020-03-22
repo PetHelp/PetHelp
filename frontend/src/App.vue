@@ -28,8 +28,10 @@
         </b-col>
       </b-row>
     </div>
-     <b-row>
+    <b-row>
+      <transition>
         <router-view/>
+      </transition>
     </b-row>
 
     <b-row>
@@ -129,7 +131,6 @@
   margin: 0% auto;
   left: 0;
   right: 0;
-  bottom: 1em;
 }
 
 footer {

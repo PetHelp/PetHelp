@@ -70,8 +70,6 @@ export default {
   methods: {
     onSubmit (evt) {
       evt.preventDefault()
-      // this.apiService.registerUser({name: this.form.name, email: this.form.email, password:this.form.password}).subscribe()
-      // show error or login and redirect
       this.$store.dispatch('register', this.form)
     }
   },
