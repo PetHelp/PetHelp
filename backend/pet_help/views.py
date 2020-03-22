@@ -114,3 +114,7 @@ def reset_password(request):
             # TODO: send email with new pw to user.email
         return HttpResponse(status=200)
     return JsonResponse(dict(email="User not found"), status=400)
+
+
+def handler404view(request, exception, template_name="404.html"):
+    return JsonResponse(data=dict(info="Not found"), status=404)

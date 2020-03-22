@@ -2,6 +2,7 @@ from drf_enum_field.serializers import EnumFieldSerializerMixin
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
+from pet_help import services
 from pet_help.models import Animal, User, Message, HelpRequest, HelpOffer
 
 
@@ -10,6 +11,7 @@ class UserSerializer(EnumFieldSerializerMixin, serializers.ModelSerializer):
         model = User
         exclude = ('id', 'password', 'role', 'virtual', 'first_name', 'last_name', 'is_staff',
                    'groups', 'user_permissions', 'is_superuser', 'date_joined', 'is_active')
+        read_only_fields = ('address_lat', 'address_lng')
 
     def validate(self, attrs):
         attrs.pop("password", None)
@@ -17,26 +19,35 @@ class UserSerializer(EnumFieldSerializerMixin, serializers.ModelSerializer):
     def create(self, validated_data):
         raise NotImplementedError()
 
+    def update(self, instance, validated_data):
+        if "address" in validated_data and validated_data.get("address") != instance.address:
+            updated_instance = super().update(self, instance, validated_data)
+            updated_instance = services.resolve_geo_for_user(updated_instance)
+            return updated_instance
+        else:
+            return super().update(self, instance, validated_data)
+
 
 class AnimalSerializer(EnumFieldSerializerMixin, serializers.ModelSerializer):
     class Meta:
         model = Animal
         exclude = ()
-        read_only_fields = ('id', 'owner')
+        read_only_fields = ('id', 'owner', 'current_address_lat', 'current_address_lng')
 
-    def validate(self, attrs):
-        attrs.pop("owner", None)
-        return attrs
-
-    def create(self, validated_data):
-        validated_data["owner"] = self.context["request"].user
-        return super().create(validated_data)
+    def update(self, instance, validated_data):
+        if "current_address" in validated_data and validated_data.get("current_address") != instance.current_address:
+            updated_instance = super().update(self, instance, validated_data)
+            updated_instance = services.resolve_geo_for_animal(updated_instance)
+            return updated_instance
+        else:
+            return super().update(self, instance, validated_data)
 
 
 class ReducedAnimalSerializer(EnumFieldSerializerMixin, serializers.ModelSerializer):
     class Meta:
         model = Animal
-        exclude = ('id', 'owner', 'care_person', 'current_address')
+        exclude = ('id', 'owner', 'care_person', 'current_address', 'current_address_lat',
+                   'current_address_lng')
 
     def create(self, validated_data):
         raise NotImplementedError()

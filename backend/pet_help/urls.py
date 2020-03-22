@@ -4,7 +4,7 @@ from rest_framework import routers
 from rest_framework_simplejwt import views as jwt_views
 
 from pet_help.views import UserViewSet, AnimalViewSet, HelpRequestViewSet, HelpOfferViewSet, \
-    MessageViewSet, register, reset_password, list_animal_types, list_help_types
+    MessageViewSet, register, reset_password, list_animal_types, list_help_types, handler404view
 
 router = routers.DefaultRouter()
 
@@ -25,3 +25,5 @@ urlpatterns = [
 
     #url(r"api/ht/", include("health_check.urls"))
 ]
+
+handler404 = handler404view

@@ -71,6 +71,8 @@ class User(AbstractUser):
                              blank=True)
     bio = models.CharField(max_length=1024, blank=True, null=True)
     address = models.CharField(max_length=50, blank=True, null=True)
+    address_lat = models.CharField(max_length=20, blank=True, null=True)
+    address_lng = models.CharField(max_length=20, blank=True, null=True)
     emergency_contact_email = models.CharField(max_length=150, blank=True, null=True)
     image = models.TextField(blank=True, null=True)
     registered_at = models.DateField(auto_now_add=True)
@@ -89,6 +91,8 @@ class Animal(models.Model):
     care_person = models.ForeignKey(User, null=True, blank=True, related_name="cared_animals",
                                     on_delete=models.SET_NULL)
     current_address = models.CharField(max_length=150, blank=True, null=True)
+    current_address_lat = models.CharField(max_length=20, blank=True, null=True)
+    current_address_lng = models.CharField(max_length=20, blank=True, null=True)
     description = models.CharField(max_length=1024, blank=True, null=True)
 
 
