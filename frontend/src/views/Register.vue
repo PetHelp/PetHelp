@@ -32,6 +32,7 @@
               required
               size="lg"
               placeholder="Gib dein Passwort ein"
+              type="password"
             ></b-form-input>
           </b-form-group>
 
@@ -42,6 +43,7 @@
               required
               size="lg"
               placeholder="Gib dein Passwort erneut ein"
+              type="password"
             ></b-form-input>
           </b-form-group>
 
@@ -53,11 +55,14 @@
 </template>
 
 <script>
+import axios from '../axios'
+
 export default {
   data () {
     return {
       form: {
         email: '',
+        name: '',
         password: '',
         password2: null
       }
@@ -68,6 +73,22 @@ export default {
       evt.preventDefault()
       // this.apiService.registerUser({name: this.form.name, email: this.form.email, password:this.form.password}).subscribe()
       // show error or login and redirect
+      axios.post('/register/', {
+        name: this.form.name,
+        email: this.form.email,
+        password: this.form.password
+      })
+        .then(() => {
+          axios.post('/token/', {
+            email: this.form.email,
+            password: this.form.password
+          })
+            .then(res => {
+              console.log(res)
+            })
+            .catch(error => console.log(error))
+        })
+        .catch(error => console.log(error))
     }
   },
   computed: {
