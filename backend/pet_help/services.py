@@ -18,6 +18,7 @@ def resolve_geo_for_animal(animal_instance):
     return animal_instance
 
 
+"""
 def get_geo_coordinates_for_address(address_string):
     if not address_string:
         return dict(lat=None, lng=None)
@@ -29,4 +30,25 @@ def get_geo_coordinates_for_address(address_string):
     except Exception as e:
         # FIXME: handle error properly
         pass
+    return dict(lat=None, lng=None)
+"""
+
+def get_geo_coordinates_for_address(address_string):
+    if not address_string:
+        return dict(lat=None, lng=None)
+    try:
+        params = {
+            "q": address_string,
+            "format": "json"
+        }
+        response = requests.get(settings.OSM_GEOCODING_URL, params=params)
+        response_json = response.json()[0]
+        latitude = response_json["lat"]
+        longitude = response_json["lon"]
+        return dict(lat=latitude, lng=longitude)
+
+    except Exception as e:
+        # FIXME: handle errors properly
+        pass
+
     return dict(lat=None, lng=None)
