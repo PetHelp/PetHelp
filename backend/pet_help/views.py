@@ -1,5 +1,7 @@
 from uuid import uuid4
 
+from django.core import signing
+from django.core.signing import Signer
 from django.db import IntegrityError
 from django.db.models import Q
 from django.http import HttpResponse, JsonResponse
@@ -16,7 +18,8 @@ from pet_help.serializers import UserSerializer, AnimalSerializer, HelpRequestSe
     HelpOfferSerializer, MessageSerializer
 
 
-class UserViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, GenericViewSet):
+class UserViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, mixins.UpdateModelMixin,
+                  GenericViewSet):
     serializer_class = UserSerializer
     permission_classes = (IsAuthenticated,)
     queryset = User.objects.all()
@@ -90,6 +93,8 @@ def register(request):
     if email and password:
         try:
             user = User.objects.create_user(email, email, password)
+            # TODO: send out email for verification with this code as query param
+            # signed_email = Signer().sign(email)
             if name:
                 user.name = name
                 user.save()
@@ -98,7 +103,8 @@ def register(request):
             return JsonResponse(dict(email="This email address is already taken"), status=400)
         except Exception as e:
             raise e
-    return JsonResponse(dict(info="All fields must be set"), status=400)
+    return JsonResponse(dict(email="This field is required", pasword="This field is required"),
+                        status=400)
 
 
 @api_view(http_method_names=["POST"])
@@ -118,6 +124,23 @@ def reset_password(request):
             # TODO: send email with new pw to user.email
         return HttpResponse(status=200)
     return JsonResponse(dict(email="User not found"), status=400)
+
+
+@api_view(http_method_names=["GET"])
+def verify_email(request):
+    signed_email = request.query_params.get("signed_email")
+    try:
+        email = Signer().unsign(signed_email)
+        user = User.objects.filter(email=email).first()
+        if user:
+            user.email_verified = True
+            user.save()
+            return JsonResponse(dict(email="Your account is activated"), status=200)
+            # TODO: must be html template or redirect to success page on frontend
+    except signing.BadSignature:
+        pass
+    return JsonResponse(dict(email="Link invalid!"), status=400)
+    # TODO: must be html template or redirect to error page on frontend
 
 
 def handler404view(request, exception, template_name="404.html"):

@@ -1,3 +1,7 @@
+import requests
+from django.conf import settings
+
+
 def resolve_geo_for_user(user_instance):
     coords = get_geo_coordinates_for_address(user_instance.address)
     user_instance.address_lat = coords["lat"]
@@ -17,5 +21,12 @@ def resolve_geo_for_animal(animal_instance):
 def get_geo_coordinates_for_address(address_string):
     if not address_string:
         return dict(lat=None, lng=None)
-    # TODO: add geocoding api call here
+    url = "{}?key={}".format(settings.MAP_QUEST_GEOCODING_URL, settings.MAP_QUEST_API_KEY)
+    try:
+        response = requests.post(url, dict(location=address_string))
+        if response.status_code == 200:
+            return response.json()["results"][0]["locations"][0]["displayLatLng"]
+    except Exception as e:
+        # FIXME: handle error properly
+        pass
     return dict(lat=None, lng=None)

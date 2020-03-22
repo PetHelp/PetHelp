@@ -9,12 +9,13 @@ from pet_help.models import Animal, User, Message, HelpRequest, HelpOffer
 class UserSerializer(EnumFieldSerializerMixin, serializers.ModelSerializer):
     class Meta:
         model = User
-        exclude = ('id', 'password', 'role', 'virtual', 'first_name', 'last_name', 'is_staff',
+        exclude = ('password', 'role', 'virtual', 'first_name', 'last_name', 'is_staff',
                    'groups', 'user_permissions', 'is_superuser', 'date_joined', 'is_active')
         read_only_fields = ('address_lat', 'address_lng')
 
     def validate(self, attrs):
         attrs.pop("password", None)
+        return attrs
 
     def create(self, validated_data):
         raise NotImplementedError()
