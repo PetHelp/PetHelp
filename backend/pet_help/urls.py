@@ -4,7 +4,8 @@ from rest_framework import routers
 from rest_framework_simplejwt import views as jwt_views
 
 from pet_help.views import UserViewSet, AnimalViewSet, HelpRequestViewSet, HelpOfferViewSet, \
-    MessageViewSet, register, reset_password, list_animal_types, list_help_types, handler404view
+    MessageViewSet, register, reset_password, list_animal_types, list_help_types, handler404view, \
+    verify_email
 
 router = routers.DefaultRouter()
 
@@ -20,6 +21,7 @@ urlpatterns = [
     re_path("api/help-types", list_help_types, name="help-types"),
     re_path('api/register/', register, name='register'),
     re_path('api/reset-password/', reset_password, name='register'),
+    re_path('api/verify-email/', verify_email, name='register'),
     re_path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     re_path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
 
