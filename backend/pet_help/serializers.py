@@ -28,6 +28,18 @@ class UserSerializer(EnumFieldSerializerMixin, serializers.ModelSerializer):
             return super().update(instance, validated_data)
 
 
+class ReducedUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('name', 'image', 'bio')
+
+    def create(self, validated_data):
+        raise NotImplementedError()
+
+    def update(self, instance, validated_data):
+        raise NotImplementedError()
+
+
 class AnimalSerializer(EnumFieldSerializerMixin, serializers.ModelSerializer):
     class Meta:
         model = Animal
@@ -65,6 +77,7 @@ class ReducedAnimalSerializer(EnumFieldSerializerMixin, serializers.ModelSeriali
 
 class HelpRequestSerializer(EnumFieldSerializerMixin, serializers.ModelSerializer):
     animals = ReducedAnimalSerializer(many=True)
+    user = ReducedUserSerializer(read_only=True)
 
     class Meta:
         model = HelpRequest
@@ -81,6 +94,8 @@ class HelpRequestSerializer(EnumFieldSerializerMixin, serializers.ModelSerialize
 
 
 class HelpOfferSerializer(EnumFieldSerializerMixin, serializers.ModelSerializer):
+    user = ReducedUserSerializer(read_only=True)
+
     class Meta:
         model = HelpOffer
         exclude = ()

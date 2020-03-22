@@ -86,10 +86,14 @@ def list_help_types(request):
 def register(request):
     email = request.data.get("email")
     password = request.data.get("password")
+    name = request.data.get("name")
     if email and password:
         try:
-            User.objects.create_user(email, email, password)
-            return HttpResponse(status=201)
+            user = User.objects.create_user(email, email, password)
+            if name:
+                user.name = name
+                user.save()
+            return JsonResponse(dict(info="Your user was created"), status=201)
         except IntegrityError as ie:
             return JsonResponse(dict(email="This email address is already taken"), status=400)
         except Exception as e:
