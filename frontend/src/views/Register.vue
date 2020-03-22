@@ -2,7 +2,7 @@
   <div class="register container pt-5 my-5 z-depth-1">
     <b-row align-h="center">
       <b-col xs="12" sm="10" md="6" lg="6" xl="4">
-        <h1>Account erstellen</h1>
+        <h1 class="text-center">Account erstellen</h1>
         <b-form @submit="onSubmit">
 
         <b-form-group id="input-group-1" label="Name" label-for="input-1">
@@ -47,8 +47,9 @@
             ></b-form-input>
           </b-form-group>
 
-          <b-button size="lg" type="submit" :disabled=!formIsValid variant="primary">Account erstellen</b-button>
+          <p class="text-center"><b-button size="lg" type="submit" :disabled=!formIsValid variant="primary">Account erstellen</b-button></p>
         </b-form>
+        <p class="text-center">Du hast bereits einen Account?<br><router-link to="/login">Dann gehts hier zur Anmeldung!</router-link></p>
       </b-col>
     </b-row>
   </div>
