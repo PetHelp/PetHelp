@@ -39,7 +39,7 @@
           <b-form-group id="input-group-4" label="Passwort Bestätigung" label-for="input-4">
             <b-form-input
               id="input-4"
-              v-model="form.password2"
+              v-model="form.confirmPassword"
               required
               size="lg"
               placeholder="Gib dein Passwort erneut ein"
@@ -55,8 +55,6 @@
 </template>
 
 <script>
-import axios from '../axios'
-
 export default {
   data () {
     return {
@@ -64,7 +62,7 @@ export default {
         email: '',
         name: '',
         password: '',
-        password2: null
+        confirmPassword: null
       }
     }
   },
@@ -73,27 +71,12 @@ export default {
       evt.preventDefault()
       // this.apiService.registerUser({name: this.form.name, email: this.form.email, password:this.form.password}).subscribe()
       // show error or login and redirect
-      axios.post('/register/', {
-        name: this.form.name,
-        email: this.form.email,
-        password: this.form.password
-      })
-        .then(() => {
-          axios.post('/token/', {
-            email: this.form.email,
-            password: this.form.password
-          })
-            .then(res => {
-              console.log(res)
-            })
-            .catch(error => console.log(error))
-        })
-        .catch(error => console.log(error))
+      this.$store.dispatch('register', this.form)
     }
   },
   computed: {
     formIsValid: function () {
-      return this.form.email && this.form.password && (this.form.password === this.form.password2)
+      return this.form.email && this.form.password && (this.form.password === this.form.confirmPassword)
     }
   }
 }
