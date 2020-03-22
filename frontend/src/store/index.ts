@@ -24,7 +24,7 @@ export default new Vuex.Store({
       bio: null,
       address: null,
       emergencyContactEmail: null,
-      animals: {}
+      animals: []
     }
   },
   mutations: {
@@ -38,6 +38,18 @@ export default new Vuex.Store({
       state.profile.bio = profile.bio
       state.profile.address = profile.address
       state.profile.emergencyContactEmail = profile.emergencyContactEmail
+    },
+    storeAnimals (state, animals) {
+      state.profile.animals = animals
+    },
+    addAnimal (state, animal) {
+      // state.profile.animals.push(animal)
+    },
+    updateAnimal (state, animal) {
+      // const updateAnimal = state.profile.animals.find(element => element.id == animal.id)
+    },
+    deleteAnimal (state, animal) {
+      // x
     }
   },
   actions: {
@@ -48,6 +60,7 @@ export default new Vuex.Store({
         password: authData.password
       })
         .then(res => {
+          console.log(res)
           dispatch('login', { email: authData.email, password: authData.password })
         })
         .catch(error => {
@@ -75,6 +88,19 @@ export default new Vuex.Store({
           console.log(error)
         })
     },
+    refreshToken ({ state, commit }) {
+      axios.post('/token/refresh', {
+        refresh: state.token.refresh
+      })
+        .then(res => {
+          console.log(res)
+          commit('authUser', {
+            refreshToken: res.data.refresh,
+            accessToken: res.data.access
+          })
+        })
+        .catch(error => console.log(error))
+    },
     logout ({ commit }) {
       commit('clearAuthData')
       localStorage.removeItem('refreshToken')
@@ -82,7 +108,7 @@ export default new Vuex.Store({
       Vue.prototype.$flashStorage.flash('Du wurdest erfolgreich abgemeldet', 'success', messageOptions)
       router.replace('/')
     },
-    getProfile ({ commit }) {
+    getProfile ({ commit, getters }) {
       axios.get('/users/')
         .then(res => {
           console.log(res)
@@ -92,17 +118,17 @@ export default new Vuex.Store({
             bio: res.data[0].bio,
             address: res.data[0].address,
             emergencyContactEmail: res.data[0].emergencyContactEmail
-          })
+          }, getters.axiosConfig)
         })
         .catch(error => console.log(error))
     },
-    updateProfile ({ commit }, profile) {
+    updateProfile ({ commit, getters }, profile) {
       axios.patch(`/users/${profile.id}/`, {
         name: profile.name,
         bio: profile.bio,
         address: profile.address,
         emergencyContactEmail: profile.emergencyContactEmail
-      })
+      }, getters.axiosConfig)
         .then(res => {
           console.log(res)
           commit('storeProfile', {
@@ -113,6 +139,49 @@ export default new Vuex.Store({
           })
         })
         .catch(error => console.log(error))
+    },
+    getAnimals ({ commit, getters }) {
+      axios.get('/animals/', getters.axiosConfig)
+        .then(res => {
+          console.log(res)
+          // commit('storeAnimals')
+        })
+        .catch(error => console.log(error))
+    },
+    createAnimal ({ commit, getters }, animal) {
+      axios.post('/animals/', getters.axiosConfig)
+        .then(res => {
+          console.log(res)
+        })
+        .catch(error => console.log(error))
+    },
+    updateAnimal ({ commit, getters }, animal) {
+      axios.put(`/animals/${animal.id}/`, {
+
+      }, getters.axiosConfig)
+        .then(res => {
+          console.log(res)
+        })
+        .catch(error => console.log(error))
+    },
+    deleteAnimal ({ commit, getters }, animal) {
+      axios.delete(`/animals/${animal.id}/`, getters.axiosConfig)
+        .then(res => {
+          console.log(res)
+        })
+        .then(error => console.log(error))
+    }
+  },
+  getters: {
+    axiosConfig(state) {
+      return {
+        headers: {
+          Authorization: `Bearer ${state.token.access}`
+        }
+      }
+    },
+    isAuthenticated(state) {
+      return state.token.access !== null
     }
   },
   modules: {
