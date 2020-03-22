@@ -173,14 +173,14 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    axiosConfig(state) {
+    axiosConfig (state) {
       return {
         headers: {
           Authorization: `Bearer ${state.token.access}`
         }
       }
     },
-    isAuthenticated(state) {
+    isAuthenticated (state) {
       return state.token.access !== null
     }
   },
