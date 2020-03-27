@@ -10,6 +10,13 @@
     </div>
 </template>
 
+<script>
+export default {
+  name: 'Avatar',
+  props: ['img', 'userName']
+}
+</script>
+
 <style scoped>
   .avatar__img-wrapper {
     position: relative;
@@ -30,10 +37,3 @@
     border: 3px solid #eee;
   }
 </style>
-
-<script>
-export default {
-  name: 'Avatar',
-  props: ['img', 'userName']
-}
-</script>

@@ -19,9 +19,3 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
-
-
-Thumbs.db
-db.json
-*.log
-src/_drafts
