@@ -4,10 +4,10 @@
       <div class="hero">
         <img class="hero__image" src="../assets/Images/pethelp-header.png" alt="" />
         <div class="hero__text">
-          <h2>Bereits 20.189 gefundene Pflegestellen!</h2>
-          <p class="mt-4">Hast du ein Tier, dass schnellst möglich durch Eintritt einer Krankheit oder Quarantäne in gute Hände zur Pflege gegeben werden muss oder du brauchst jemand der sich
+          <h1>Bereits 20.189 gefundene Pflegestellen!</h1>
+          <p class="mt-4">Hast du ein Tier, dass schnellstmöglich durch Eintritt einer Krankheit oder Quarantäne in gute Hände zur Pflege gegeben werden muss oder du brauchst jemanden, der sich
             stationär um deine Tiere kümmert?</p>
-          <p> Dann bist du bei UNS genau richtig!</p>
+          <p>Dann bist du bei UNS genau richtig!</p>
 
           <div class="here__actions mt-5">
             <button type="button" class="btn btn-primary btn-lg btn-light mr-4 px-4 py-2"><b>Ich suche Hilfe</b></button>
@@ -135,10 +135,10 @@ export default {
   .hero__text {
     position: absolute;
     top: 4em;
-    left: 3em;
+    left: 5em;
     width: 50%;
     line-height: 1.5;
-    font-size: 1.15em;
+    font-size: 1.2em;
   }
 
   .btn-outline {

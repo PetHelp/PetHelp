@@ -43,6 +43,9 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "+2d*2u+s1b=sz9tjv0cacr!bs9+-^)5g+bp
 MAP_QUEST_API_KEY = os.getenv("MAP_QUEST_API_KEY", "")
 MAP_QUEST_GEOCODING_URL = "https://www.mapquestapi.com/geocoding/v1/address"
 
+# OSM
+OSM_GEOCODING_URL = "https://nominatim.openstreetmap.org/search"
+
 INSTALLED_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",

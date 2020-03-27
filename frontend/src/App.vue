@@ -5,7 +5,7 @@
         <b-col cols="10">
         <flash-message></flash-message>
           <div class="d-flex align-items-center">
-            <img src="http://via.placeholder.com/150x50">
+            <img src="./assets/Images/Logo-quarantiere.png" alt="" style="width: 200px;">
             <router-link class="ml-5" to="/">Home</router-link>
             <router-link class="ml-5" to="/hilfe-suchen">Hilfe suchen</router-link>
             <router-link class="ml-5" to="/hilfe-anbieten">Hilfe anbieten</router-link>
@@ -51,7 +51,7 @@
                 <b-col cols="3" class="pb-5">
                   <ul>
                     <li><router-link to="/hilfe-suchen">Hilfe suchen</router-link></li>
-                    <li><a href="#">Hilfe anbieten</a></li>
+                    <li><router-link to="/hilfe-anbieten">Hilfe anbieten</router-link></li>
                     <li><a href="#">Guideline</a></li>
                     <li><a href="#">FAQ</a></li>
                   </ul>
