@@ -51,7 +51,7 @@ const routes = [
   {
     path: '/register',
     name: 'register',
-    component: () => import(/* webpackChunkName: "register" */ '../views/Register.vue'),
+    component: () => import(/* webpackChunkName: "register" */ '../views/Register.vue')
     /* beforeEnter: (to, from, next) => {
       if (Vue.$store.get('isAuthenticated')) { // logged in
         console.log('guarded')
