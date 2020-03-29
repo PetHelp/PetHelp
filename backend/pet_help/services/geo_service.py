@@ -1,3 +1,4 @@
+from math import sin, cos, sqrt, atan2, radians
 import requests
 from django.conf import settings
 
@@ -52,3 +53,21 @@ def get_geo_coordinates_for_address(address_string):
         pass
 
     return dict(lat=None, lng=None)
+
+
+def get_distance_between_points_in_km(lat1, lng1, lat2, lng2):
+    R = 6373.0
+
+    lat1 = radians(lat1)
+    lng1 = radians(lng1)
+    lat2 = radians(lat2)
+    lng2 = radians(lng2)
+
+    dlng = lng2 - lng1
+    dlat = lat2 - lat1
+
+    a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlng / 2) ** 2
+    c = 2 * atan2(sqrt(a), sqrt(1 - a))
+
+    distance = R * c
+    return distance

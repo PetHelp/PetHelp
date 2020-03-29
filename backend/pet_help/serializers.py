@@ -2,7 +2,7 @@ from drf_enum_field.serializers import EnumFieldSerializerMixin
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
-from pet_help import services
+from pet_help.services import geo_service
 from pet_help.models import Animal, User, Message, HelpRequest, HelpOffer
 
 
@@ -24,7 +24,7 @@ class UserSerializer(EnumFieldSerializerMixin, serializers.ModelSerializer):
     def update(self, instance, validated_data):
         if "address" in validated_data and validated_data.get("address") != instance.address:
             updated_instance = super().update(instance, validated_data)
-            updated_instance = services.resolve_geo_for_user(updated_instance)
+            updated_instance = geo_service.resolve_geo_for_user(updated_instance)
             return updated_instance
         else:
             return super().update(instance, validated_data)
@@ -51,7 +51,7 @@ class AnimalSerializer(EnumFieldSerializerMixin, serializers.ModelSerializer):
     def create(self, validated_data):
         validated_data["owner"] = self.context["request"].user
         instance = super().create(validated_data)
-        instance = services.resolve_geo_for_animal(instance)
+        instance = geo_service.resolve_geo_for_animal(instance)
         return instance
 
     def update(self, instance, validated_data):
@@ -78,7 +78,6 @@ class ReducedAnimalSerializer(EnumFieldSerializerMixin, serializers.ModelSeriali
 
 
 class HelpRequestSerializer(EnumFieldSerializerMixin, serializers.ModelSerializer):
-    animals = ReducedAnimalSerializer(many=True)
     user = ReducedUserSerializer(read_only=True)
 
     class Meta:
@@ -88,11 +87,19 @@ class HelpRequestSerializer(EnumFieldSerializerMixin, serializers.ModelSerialize
 
     def validate(self, attrs):
         attrs.pop("owner", None)
+        attrs["animals"] = [animal for animal in attrs["animals"]
+                            if animal.owner == self.context["request"].user]
+        if not len(attrs["animals"]):
+            raise ValidationError(dict(animals="At least one animal must be set"))
         return attrs
 
     def create(self, validated_data):
         validated_data["user"] = self.context["request"].user
         return super().create(validated_data)
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        return representation
 
 
 class HelpOfferSerializer(EnumFieldSerializerMixin, serializers.ModelSerializer):
