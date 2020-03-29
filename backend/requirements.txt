@@ -7,3 +7,4 @@ djangorestframework==3.11.0
 drf-enum-field==0.9.3
 djangorestframework_simplejwt
 requests==2.23
+geopy==1.21.0
