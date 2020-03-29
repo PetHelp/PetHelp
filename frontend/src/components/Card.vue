@@ -14,6 +14,16 @@
   </div>
 </template>
 
+<script>
+import Avatar from '../components/Avatar.vue'
+
+export default {
+  name: 'Card',
+  props: ['user'],
+  components: { Avatar }
+}
+</script>
+
 <style>
   .user__card {
     display: flex;
@@ -40,13 +50,3 @@
     color: white;
   }
 </style>
-
-<script>
-import Avatar from '../components/Avatar.vue'
-
-export default {
-  name: 'Card',
-  props: ['user'],
-  components: { Avatar }
-}
-</script>

@@ -99,6 +99,14 @@
   </div>
 </template>
 
+<script>
+import Avatar from '@/components/Avatar.vue'
+
+export default {
+  components: { Avatar }
+}
+</script>
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -156,10 +164,3 @@ footer a svg {
   width: 2rem;
 }
 </style>
-<script>
-import Avatar from '@/components/Avatar.vue'
-
-export default {
-  components: { Avatar }
-}
-</script>
