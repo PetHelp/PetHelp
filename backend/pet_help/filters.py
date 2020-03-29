@@ -11,10 +11,10 @@ class HelpOfferFilterSet(filters.FilterSet):
 
 
 class HelpRequestFilterSet(filters.FilterSet):
+    distance = filters.NumberFilter(method='filter_by_distance')
+
     def filter_by_distance(self, queryset, name, value):
         return queryset
-
-    distance = filters.NumberFilter(method=filter_by_distance)
 
     class Meta:
         model = HelpRequest

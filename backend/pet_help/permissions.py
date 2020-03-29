@@ -19,9 +19,6 @@ class PublicReadOwnerWritePermission(BasePermission):
 
 
 class OwnerReadWritePermission(IsAuthenticated):
-    def has_permission(self, request, view):
-        return super().has_permission(request, view)
-
     def has_object_permission(self, request, view, obj):
         if not super().has_object_permission(request, view, obj):
             return False
