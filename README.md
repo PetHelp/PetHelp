@@ -1,4 +1,4 @@
-![](https://github.com/PetHelp/PetHelp/workflows/.github/workflows/frontend.yml/badge.svg)
+![](https://github.com/PetHelp/PetHelp/workflows/CI%20for%20frontend/badge.svg)
 
 # Pet Help Map
 
