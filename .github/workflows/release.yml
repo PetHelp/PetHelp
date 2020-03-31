@@ -1,0 +1,87 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  dockerhub:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Get version parts
+      run: |
+        echo ::set-env name=TAG_MAJOR::$(echo ${GITHUB_REF/refs\/tags\/v/} | cut -d. -f1)
+        echo ::set-env name=TAG_MINOR::$(echo ${GITHUB_REF/refs\/tags\/v/} | cut -d. -f2)
+        echo ::set-env name=TAG_REVISION::$(echo ${GITHUB_REF/refs\/tags\/v/} | cut -d. -f3)
+
+    - name: Set image names
+      run: |
+        echo ::set-env name=BACKEND_IMAGE::${{ secrets.DOCKERHUB_USERNAME }}/backend
+        echo ::set-env name=FRONTEND_IMAGE::${{ secrets.DOCKERHUB_USERNAME }}/frontend
+         
+    - name: Login
+      uses: Azure/docker-login@v1
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          
+    - name: Checkout git repository
+      uses: actions/checkout@v2
+
+    - name: Build backend image and create tags
+      run: |
+        docker build . -f Dockerfile -t backend:latest
+        docker tag backend:latest ${{ env.BACKEND_IMAGE }}:latest
+        docker tag backend:latest ${{ env.BACKEND_IMAGE }}:${{ env.TAG_MAJOR}}
+        docker tag backend:latest ${{ env.BACKEND_IMAGE }}:${{ env.TAG_MAJOR}}.${{ env.TAG_MINOR }}
+        docker tag backend:latest ${{ env.BACKEND_IMAGE }}:${{ env.TAG_MAJOR}}.${{ env.TAG_MINOR }}.${{ env.TAG_REVISION }}
+      working-directory: ./backend
+
+    - name: Build frontend image and create tags
+      run: |
+        docker build . -f Dockerfile -t frontend:latest
+        docker tag frontend:latest ${{ env.FRONTEND_IMAGE }}:latest
+        docker tag frontend:latest ${{ env.FRONTEND_IMAGE }}:${{ env.TAG_MAJOR}}
+        docker tag frontend:latest ${{ env.FRONTEND_IMAGE }}:${{ env.TAG_MAJOR}}.${{ env.TAG_MINOR }}
+        docker tag frontend:latest ${{ env.FRONTEND_IMAGE }}:${{ env.TAG_MAJOR}}.${{ env.TAG_MINOR }}.${{ env.TAG_REVISION }}
+      working-directory: ./frontend
+
+    - name: Push backend images
+      run: |
+        docker push ${{ env.BACKEND_IMAGE }}:latest
+        docker push ${{ env.BACKEND_IMAGE }}:${{ env.TAG_MAJOR}}
+        docker push ${{ env.BACKEND_IMAGE }}:${{ env.TAG_MAJOR}}.${{ env.TAG_MINOR }}
+        docker push ${{ env.BACKEND_IMAGE }}:${{ env.TAG_MAJOR}}.${{ env.TAG_MINOR }}.${{ env.TAG_REVISION }}
+
+    - name: Push frontend images
+      run: |
+        docker push ${{ env.FRONTEND_IMAGE }}:latest
+        docker push ${{ env.FRONTEND_IMAGE }}:${{ env.TAG_MAJOR}}
+        docker push ${{ env.FRONTEND_IMAGE }}:${{ env.TAG_MAJOR}}.${{ env.TAG_MINOR }}
+        docker push ${{ env.FRONTEND_IMAGE }}:${{ env.TAG_MAJOR}}.${{ env.TAG_MINOR }}.${{ env.TAG_REVISION }}
+
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout git repository
+      uses: actions/checkout@v2
+
+    - name: Read CHANGELOG.md
+      id: changelog
+      uses: juliangruber/read-file-action@v1
+      with:
+        path: ./CHANGELOG.md
+
+    - name: Create release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: PetHelp ${{ github.ref }}
+        body: ${{ steps.changelog.outputs.content }}
+        draft: false
+        prerelease: false

@@ -8,12 +8,12 @@ on:
     paths:
     - 'frontend/**'
 
+env:
+  working-directory: ./frontend
+
 jobs:
   integration:
     runs-on: ubuntu-latest
-
-    env:
-      working-directory: ./frontend
 
     steps:
       - name: Checkout git repository
@@ -34,4 +34,15 @@ jobs:
 
       - name: Build
         run: npm run build
+        working-directory: ${{ env.working-directory }}
+
+  docker:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout git repository
+        uses: actions/checkout@v2
+        
+      - name: Build image
+        run: docker build . -f Dockerfile
         working-directory: ${{ env.working-directory }}
