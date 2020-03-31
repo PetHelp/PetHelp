@@ -13,7 +13,7 @@
     "url": "git+https://github.com/PetHelp/PetHelp.git"
   },
   "author": "PetHelp",
-  "license": "AGPL-3.0",
+  "license": "AGPL-3.0-only",
   "bugs": {
     "url": "https://github.com/PetHelp/PetHelp/issues"
   },
