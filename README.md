@@ -1,5 +1,6 @@
-![](https://github.com/PetHelp/PetHelp/workflows/CI%20for%20frontend/badge.svg)
-![](https://github.com/PetHelp/PetHelp/workflows/Release/badge.svg)
+![CI for frontend](https://github.com/PetHelp/PetHelp/workflows/CI%20for%20frontend/badge.svg)
+![CI for backend](https://github.com/PetHelp/PetHelp/workflows/CI%20for%20backend/badge.svg)
+![Release](https://github.com/PetHelp/PetHelp/workflows/Release/badge.svg)
 
 # Pet Help Map
 

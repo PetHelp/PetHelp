@@ -1,0 +1,24 @@
+name: CI for backend
+
+on:
+  push:
+    paths:
+    - 'backend/**'
+  pull_request:
+    paths:
+    - 'backend/**'
+
+env:
+  working-directory: ./backend
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout git repository
+        uses: actions/checkout@v2
+        
+      - name: Build image
+        run: docker build . -f Dockerfile
+        working-directory: ${{ env.working-directory }}
