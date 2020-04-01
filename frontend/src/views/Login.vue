@@ -3,7 +3,7 @@
     <b-row align-h="center">
       <b-col xs="12" sm="10" md="6" lg="6" xl="4">
         <h1 class="text-center">Anmelden</h1>
-        <b-form @submit="onSubmit">
+        <b-form @submit.prevent="onSubmit">
 
           <b-form-group id="input-group-1" label="E-Mail-Adresse" label-for="input-1">
             <b-form-input
@@ -46,13 +46,12 @@ export default {
     }
   },
   methods: {
-    onSubmit (evt) {
-      evt.preventDefault()
+    onSubmit () {
       this.$store.dispatch('login', this.form)
     }
   },
   computed: {
-    formIsValid: function () {
+    formIsValid () {
       return this.form.email && this.form.password
     }
   }

@@ -3,7 +3,7 @@
     <div id="nav" class="py-4 text-center container">
       <b-row align-h="center">
         <b-col cols="10">
-        <flash-message></flash-message>
+        <!--<flash-message></flash-message>-->
           <div class="d-flex align-items-center">
             <img src="./assets/Images/Logo-quarantiere.png" alt="" style="width: 200px;">
             <router-link class="ml-5" to="/">Home</router-link>

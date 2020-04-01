@@ -62,6 +62,16 @@ export default {
         ]
       }
     }
+  },
+  created: function () {
+    if (this.$store.state.profile.id === null) {
+      this.$store.dispatch('getProfile')
+    }
+
+    const profile = this.$store.state.profile
+    this.user.name = profile.name
+    this.user.hometown = profile.address
+    this.user.experience = profile.bio
   }
 }
 </script>

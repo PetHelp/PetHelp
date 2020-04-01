@@ -6,6 +6,7 @@ module.exports = {
         aggregateTimeout: 300,
         poll: 1500
       }
-    }
+    },
+    devtool: 'source-map'
   }
 }
