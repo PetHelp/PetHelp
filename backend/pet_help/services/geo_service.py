@@ -3,20 +3,12 @@ from django.conf import settings
 from geopy import distance
 
 
-def resolve_geo_for_user(user_instance):
-    coords = get_geo_coordinates_for_address(user_instance.address)
-    user_instance.address_lat = coords["lat"]
-    user_instance.address_lng = coords["lng"]
-    user_instance.save()
-    return user_instance
-
-
-def resolve_geo_for_animal(animal_instance):
-    coords = get_geo_coordinates_for_address(animal_instance.current_address)
-    animal_instance.current_address_lat = coords["lat"]
-    animal_instance.current_address_lng = coords["lng"]
-    animal_instance.save()
-    return animal_instance
+def resolve_geo_for_address(instance):
+    coords = get_geo_coordinates_for_address(instance.address)
+    instance.address_lat = coords["lat"]
+    instance.address_lng = coords["lng"]
+    instance.save()
+    return instance
 
 
 """
@@ -34,14 +26,12 @@ def get_geo_coordinates_for_address(address_string):
     return dict(lat=None, lng=None)
 """
 
+
 def get_geo_coordinates_for_address(address_string):
     if not address_string:
         return dict(lat=None, lng=None)
     try:
-        params = {
-            "q": address_string,
-            "format": "json"
-        }
+        params = {"q": address_string, "format": "json"}
         response = requests.get(settings.OSM_GEOCODING_URL, params=params)
         response_json = response.json()[0]
         latitude = response_json["lat"]

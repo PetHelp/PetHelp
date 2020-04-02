@@ -18,6 +18,11 @@ jobs:
     steps:
       - name: Checkout git repository
         uses: actions/checkout@v2
+
+      - name: Check formatting rules with black
+        uses: lgeiger/black-action@master
+        with:
+          args: ". --check --line-length 99"
         
       - name: Build image
         run: docker build . -f Dockerfile

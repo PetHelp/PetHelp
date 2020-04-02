@@ -35,7 +35,7 @@ USE_TZ = True
 ALLOWED_HOSTS = ["*"]
 CORS_ORIGIN_ALLOW_ALL = True  # FIXME: replace with CORS_ORIGIN_WHITELIST = [frontend-host]
 
-AUTH_USER_MODEL = 'pet_help.User'
+AUTH_USER_MODEL = "pet_help.User"
 
 # from env
 DEBUG = os.getenv("DJANGO_DEBUG", "false")
@@ -65,32 +65,36 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.AllowAny"],
     "DEFAULT_RENDERER_CLASSES": ["rest_framework.renderers.JSONRenderer"],
     "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
-    'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework_simplejwt.authentication.JWTAuthentication'],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework_simplejwt.authentication.JWTAuthentication"
+    ],
 }
 
 DATABASES = {
-    'default': {
-        'ENGINE': os.getenv("DJANGO_DB_ENGINE", "django.db.backends.sqlite3"),  # set to django.db.backends.mysql via env var
-        'NAME':  os.getenv("DJANGO_DB_NAME", os.path.join(BASE_DIR, 'db.sqlite')),
+    "default": {
+        "ENGINE": os.getenv(
+            "DJANGO_DB_ENGINE", "django.db.backends.sqlite3"
+        ),  # set to django.db.backends.mysql via env var
+        "NAME": os.getenv("DJANGO_DB_NAME", os.path.join(BASE_DIR, "db.sqlite")),
         "HOST": os.getenv("DJANGO_DB_HOST"),
         "PORT": os.getenv("DJANGO_DB_PORT", 3306),
         "USER": os.getenv("DJANGO_DB_USER"),
-        "PASSWORD": os.getenv("DJANGO_DB_PASSWORD")
+        "PASSWORD": os.getenv("DJANGO_DB_PASSWORD"),
     }
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
-    'REFRESH_TOKEN_LIFETIME': timedelta(hours=12),
-    'ROTATE_REFRESH_TOKENS': True,
-    'ALGORITHM': 'HS256',
-    'SIGNING_KEY': os.getenv("JWT_SIGNING_KEY", SECRET_KEY),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=15),
+    "REFRESH_TOKEN_LIFETIME": timedelta(hours=12),
+    "ROTATE_REFRESH_TOKENS": True,
+    "ALGORITHM": "HS256",
+    "SIGNING_KEY": os.getenv("JWT_SIGNING_KEY", SECRET_KEY),
 }
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
-        'APP_DIRS': True
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
+        "APP_DIRS": True,
     },
 ]

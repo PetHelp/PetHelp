@@ -6,14 +6,13 @@ from pet_help.services import geo_service
 
 
 class HelpOfferFilterSet(filters.FilterSet):
-
     class Meta:
         model = HelpOffer
-        fields = ['type', 'active']
+        fields = ["type", "active"]
 
 
 class HelpRequestFilterSet(filters.FilterSet):
-    max_distance = filters.NumberFilter(method='filter_by_distance')
+    max_distance = filters.NumberFilter(method="filter_by_distance")
 
     def filter_by_distance(self, queryset, name, value):
         """
@@ -34,10 +33,10 @@ class HelpRequestFilterSet(filters.FilterSet):
 
     class Meta:
         model = HelpRequest
-        fields = ['type', 'active']
+        fields = ["type", "active"]
 
 
 class MessageFilterSet(filters.FilterSet):
     class Meta:
         model = Message
-        fields = ['receiver', 'sender', 'related_help_offer', 'related_help_request']
+        fields = ["receiver", "sender", "related_help_offer", "related_help_request"]

@@ -14,12 +14,18 @@ from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from pet_help.filters import HelpOfferFilterSet, HelpRequestFilterSet, MessageFilterSet
 from pet_help.models import Animal, User, HelpRequest, HelpOffer, Message, AnimalType, HelpType
 from pet_help.permissions import OwnerReadWritePermission, PublicReadOwnerWritePermission
-from pet_help.serializers import UserSerializer, AnimalSerializer, HelpRequestSerializer, \
-    HelpOfferSerializer, MessageSerializer
+from pet_help.serializers import (
+    UserSerializer,
+    AnimalSerializer,
+    HelpRequestSerializer,
+    HelpOfferSerializer,
+    MessageSerializer,
+)
 
 
-class UserViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, mixins.UpdateModelMixin,
-                  GenericViewSet):
+class UserViewSet(
+    mixins.RetrieveModelMixin, mixins.ListModelMixin, mixins.UpdateModelMixin, GenericViewSet
+):
     serializer_class = UserSerializer
     permission_classes = (IsAuthenticated,)
     queryset = User.objects.all()
@@ -33,7 +39,7 @@ class AnimalViewSet(ModelViewSet):
     filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
     permission_classes = (OwnerReadWritePermission,)
     queryset = Animal.objects.all()
-    ordering_fields = ['name', 'active']
+    ordering_fields = ["name", "active"]
 
     def get_queryset(self):
         return Animal.objects.filter(owner=self.request.user)
@@ -45,7 +51,7 @@ class HelpRequestViewSet(ModelViewSet):
     filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
     permission_classes = (PublicReadOwnerWritePermission,)
     filterset_class = HelpRequestFilterSet
-    ordering_fields = ['created_at', 'type']
+    ordering_fields = ["created_at", "type"]
 
 
 class HelpOfferViewSet(ModelViewSet):
@@ -54,19 +60,18 @@ class HelpOfferViewSet(ModelViewSet):
     filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
     permission_classes = (PublicReadOwnerWritePermission,)
     filterset_class = HelpOfferFilterSet
-    ordering_fields = ['created_at', 'type']
+    ordering_fields = ["created_at", "type"]
 
 
-class MessageViewSet(mixins.CreateModelMixin,
-                     mixins.RetrieveModelMixin,
-                     mixins.ListModelMixin,
-                     GenericViewSet):
+class MessageViewSet(
+    mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin, GenericViewSet
+):
     serializer_class = MessageSerializer
     filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
     permission_classes = (IsAuthenticated,)
     queryset = Message.objects.all()
     filterset_class = MessageFilterSet
-    ordering_fields = ['created_at']
+    ordering_fields = ["created_at"]
 
     def get_queryset(self):
         user = self.request.user
@@ -103,8 +108,9 @@ def register(request):
             return JsonResponse(dict(email="This email address is already taken"), status=400)
         except Exception as e:
             raise e
-    return JsonResponse(dict(email="This field is required", pasword="This field is required"),
-                        status=400)
+    return JsonResponse(
+        dict(email="This field is required", pasword="This field is required"), status=400
+    )
 
 
 @api_view(http_method_names=["POST"])

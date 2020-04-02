@@ -12,7 +12,7 @@ class PublicReadOwnerWritePermission(BasePermission):
             return False
         if request.method == "GET":
             return True
-        
+
         if request.user and request.user.is_authenticated:
             return obj.user == request.user
         return False

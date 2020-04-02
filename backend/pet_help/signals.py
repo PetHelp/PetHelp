@@ -9,4 +9,3 @@ def post_login(sender, user, request, **kwargs):
     # FIXME: this is currently not working because signal is not sent on token auth
     user.last_login = datetime.now()
     user.save()
-
