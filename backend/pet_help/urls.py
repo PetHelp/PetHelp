@@ -1,6 +1,8 @@
 from django.conf.urls import include
 from django.urls import re_path
+from django.views.generic import TemplateView
 from rest_framework import routers
+from rest_framework.schemas import get_schema_view
 from rest_framework_simplejwt import views as jwt_views
 
 from pet_help.views import UserViewSet, AnimalViewSet, HelpRequestViewSet, HelpOfferViewSet, \
@@ -24,6 +26,14 @@ urlpatterns = [
     re_path('api/verify-email/', verify_email, name='register'),
     re_path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     re_path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+
+    re_path('api/docs/openapi/', get_schema_view(
+        title="Quarantiere.de Api Docs", description="", version="1.0.0", public=True
+    ), name='openapi-schema'),
+    re_path('api/docs/', TemplateView.as_view(
+        template_name='swagger-ui.html',
+        extra_context={'schema_url': 'openapi-schema'}
+    ), name='swagger-ui'),
 
     #url(r"api/ht/", include("health_check.urls"))
 ]
