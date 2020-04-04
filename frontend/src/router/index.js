@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+// import store from '../store'
 import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
@@ -33,19 +34,30 @@ const routes = [
   {
     path: '/profil',
     name: 'profile',
-    component: () => import(/* webpackChunkName: "profil" */ '../views/Profile.vue')
+    component: () => import(/* webpackChunkName: "profile" */ '../views/Profile.vue')
     /* beforeEnter: (to, from, next) => {
-      if (false) next({ name: 'login' }) // loggedout
-      else next()
-    } */
+      if (store.getters.isAuthenticated) {
+        next()
+      } else {
+        next('/login')
+      }
+    }, */
+  },
+  {
+    path: '/profil/haustier/add',
+    name: 'addPet',
+    component: () => import(/* webpackChunkName: "addPet" */ '../views/AddAnimal.vue')
   },
   {
     path: '/login',
     name: 'login',
     component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue')
     /* beforeEnter: (to, from, next) => {
-      if (false) next({ name: 'profile' }) // loggedin
-      else next()
+      if (store.getters.isAuthenticated) {
+        next('/profile')
+      } else {
+        next()
+      }
     } */
   },
   {
@@ -53,10 +65,11 @@ const routes = [
     name: 'register',
     component: () => import(/* webpackChunkName: "register" */ '../views/Register.vue')
     /* beforeEnter: (to, from, next) => {
-      if (Vue.$store.get('isAuthenticated')) { // logged in
-        console.log('guarded')
+      if (store.getters.isAuthenticated) {
         next('/profile')
-      } else next()
+      } else {
+        next()
+      }
     } */
   }
 ]

@@ -103,7 +103,11 @@
 import Avatar from '@/components/Avatar.vue'
 
 export default {
-  components: { Avatar }
+  components: { Avatar },
+  created () {
+    this.$store.dispatch('attemptLogin')
+    this.$store.dispatch('getMasterData')
+  }
 }
 </script>
 
