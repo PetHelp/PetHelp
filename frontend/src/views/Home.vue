@@ -60,6 +60,7 @@ import Animal from '../components/Animal.vue'
 import Card from '../components/Card.vue'
 
 export default {
+  title: 'Quarantiere',
   components: { Animal, Card },
   data: function () {
     return {

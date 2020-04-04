@@ -46,6 +46,7 @@ import Avatar from '../components/Avatar.vue'
 import Animal from '../components/Animal.vue'
 
 export default {
+  title: 'Quarantiere - Profil',
   name: 'profile-view',
   components: { Avatar, Animal },
   data: function () {

@@ -37,6 +37,7 @@
 
 <script>
 export default {
+  title: 'Quarantiere - Login',
   data () {
     return {
       form: {

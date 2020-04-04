@@ -64,21 +64,11 @@
   </div>
 </template>
 
-<style>
-  .suche__link {
-    color: #2c4e57;
-    text-decoration: underline;
-  }
-
-  .page {
-    border-top: 1px solid #2c4e57;
-  }
-</style>
-
 <script>
 import Animal from '../components/Animal.vue'
 
 export default {
+  title: 'Quarantiere - Hilfe anbieten',
   components: { Animal },
   data: function () {
     return {
@@ -132,3 +122,14 @@ export default {
   }
 }
 </script>
+
+<style>
+  .suche__link {
+    color: #2c4e57;
+    text-decoration: underline;
+  }
+
+  .page {
+    border-top: 1px solid #2c4e57;
+  }
+</style>

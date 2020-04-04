@@ -72,6 +72,12 @@
 </div>
 </template>
 
+<script>
+export default {
+  title: 'Quarantiere - FAQ'
+}
+</script>
+
 <style scoped>
   .wrapper{
     width: 1280px;

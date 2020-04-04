@@ -57,6 +57,7 @@
 
 <script>
 export default {
+  title: 'Quarantiere - Registrierung',
   data () {
     return {
       form: {
