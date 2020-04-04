@@ -85,7 +85,6 @@ export default {
   methods: {
     startEditMode: function (event) {
       this.editMode = true
-      console.log(this.$refs.inputElement)
     },
     saveChange: function (event) {
       this.editMode = false
