@@ -12,17 +12,25 @@ env:
   working-directory: ./backend
 
 jobs:
+  integration:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout git repository
+        uses: actions/checkout@v2
+      
+      - name: Linting
+        uses: lgeiger/black-action@v1
+        with:
+          args: ". --check --line-length 99"
+        working-directory: ${{ env.working-directory }}
+
   docker:
     runs-on: ubuntu-latest
     
     steps:
       - name: Checkout git repository
         uses: actions/checkout@v2
-
-      - name: Check formatting rules with black
-        uses: lgeiger/black-action@master
-        with:
-          args: ". --check --line-length 99"
         
       - name: Build image
         run: docker build . -f Dockerfile
