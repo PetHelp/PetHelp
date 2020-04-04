@@ -30,7 +30,6 @@ instance.interceptors.response.use((response) => {
             access: res.data.access
           })
           originalRequest.headers.Authorization = 'Bearer ' + res.data.access
-          console.log(originalRequest)
           return instance(originalRequest)
         }
       })
