@@ -68,7 +68,7 @@ export default new Vuex.Store({
           console.log(error)
         })
     },
-    login ({ commit }, authData) {
+    login ({ commit, dispatch }, authData) {
       axios.post('/token/', {
         email: authData.email,
         password: authData.password
@@ -81,6 +81,7 @@ export default new Vuex.Store({
           localStorage.setItem('refreshToken', res.data.refresh)
           localStorage.setItem('accessToken', res.data.access)
           // Vue.prototype.$flashStorage.flash('Du wurdest erfolgreich angemeldet', 'success', messageOptions)
+          dispatch('getProfile')
           router.replace('/profil')
         })
         .catch(error => {
@@ -118,7 +119,7 @@ export default new Vuex.Store({
             name: data.name,
             bio: data.bio,
             address: data.address,
-            emergencyContactEmail: data.emergencyContactEmail
+            emergencyContactEmail: data.emergency_contact_email
           })
         })
         .catch(error => console.log(error))
@@ -128,11 +129,12 @@ export default new Vuex.Store({
         name: profile.name,
         bio: profile.bio,
         address: profile.address,
-        emergencyContactEmail: profile.emergencyContactEmail
+        emergency_contact_email: profile.emergencyContactEmail
       }, getters.axiosConfig)
         .then(res => {
           console.log(res)
           commit('storeProfile', {
+            id: profile.id,
             name: profile.name,
             bio: profile.bio,
             address: profile.address,

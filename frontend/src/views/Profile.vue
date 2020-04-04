@@ -5,9 +5,9 @@
         <Avatar :img="user.img" :user-name="user.name" />
       </div>
       <div class="user__personal-data col-6 text-left">
-        <h1>{{ user.name }}</h1>
-        <b>Wohnort:</b> {{ user.hometown }}<br>
-        <b>Telefon:</b> {{ user.phone }}
+        <h1><EditableTextOutput v-bind:value="user.name" v-on:input="user.name = $event" v-on:change="updateProfile()" /></h1>
+        <b>Wohnort:</b> <EditableTextOutput :value="user.address" v-on:input="user.address = $event" v-on:change="updateProfile()" /><br>
+        <b>Notfall-E-Mail:</b> <EditableTextOutput :value="user.emergencyContactEmail" v-on:input="user.emergencyContactEmail = $event" v-on:change="updateProfile()" />
       </div>
     </b-row>
 
@@ -16,7 +16,7 @@
         <div class="user__experience">
           <h2>Erfahrungen / Präferenzen</h2>
           <p>
-            {{ user.experience }}
+            <EditableTextOutput :type="'textarea'" :cols="100" :rows="10" :value="user.bio" v-on:input="user.bio = $event" v-on:change="updateProfile()" />
           </p>
         </div>
       </b-col>
@@ -44,34 +44,52 @@
 <script>
 import Avatar from '../components/Avatar.vue'
 import Animal from '../components/Animal.vue'
+import EditableTextOutput from '../components/EditableTextOutput.vue'
 
 export default {
   name: 'profile-view',
-  components: { Avatar, Animal },
+  components: { Avatar, Animal, EditableTextOutput },
   data: function () {
     return {
       user: {
         name: 'Corinna Quarantina',
         img: 'Mensch3.jpg',
-        hometown: 'Berlin',
-        phone: '(0179) 200 33 66',
-        experience: 'Spicy jalapeno cow ribeye drumstick meatloaf. Meatball t-bone ham spare ribs, short ribs ball tip alcatra leberkas ham hock chislic landjaeger. Brisket bresaola venison, buffalo ball tip beef pastrami meatball shank flank. Pork chop leberkas frankfurter short loin chislic tenderloin drumstick pastrami kevin pork loin tail jowl pig.',
+        address: 'Berlin',
+        emergencyContactEmail: 'some-mail@somewhere.com',
+        bio: 'Spicy jalapeno cow ribeye drumstick meatloaf. Meatball t-bone ham spare ribs, short ribs ball tip alcatra leberkas ham hock chislic landjaeger. Brisket bresaola venison, buffalo ball tip beef pastrami meatball shank flank. Pork chop leberkas frankfurter short loin chislic tenderloin drumstick pastrami kevin pork loin tail jowl pig.',
         animals: [
           { id: 1, name: 'T-Rex', age: 6, img: 'Hund3.jpg' },
           { id: 2, name: 'Sumo', age: 2, img: 'Hund2.png' }
-        ]
+        ],
+        test: 'hi'
       }
     }
   },
   created: function () {
-    if (this.$store.state.profile.id === null) {
-      this.$store.dispatch('getProfile')
+    this.loadProfile()
+  },
+  methods: {
+    loadProfile: function () {
+      if (this.$store.state.profile.id === null) {
+        this.$store.dispatch('getProfile')
+      }
+      console.log(this.$store.state.profile)
+      const profile = this.$store.state.profile
+      this.user.name = profile.name
+      this.user.address = profile.address
+      this.user.bio = profile.bio
+      this.user.animals = profile.animals
+      this.user.emergencyContactEmail = profile.emergencyContactEmail
+    },
+    updateProfile: function () {
+      this.$store.dispatch('updateProfile', {
+        id: this.$store.state.profile.id,
+        name: this.user.name,
+        bio: this.user.bio,
+        address: this.user.address,
+        emergencyContactEmail: this.user.emergencyContactEmail
+      })
     }
-
-    const profile = this.$store.state.profile
-    this.user.name = profile.name
-    this.user.hometown = profile.address
-    this.user.experience = profile.bio
   }
 }
 </script>
