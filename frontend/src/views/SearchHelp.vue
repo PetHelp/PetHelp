@@ -9,3 +9,9 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  title: 'Quarantiere - Hilfe suchen'
+}
+</script>

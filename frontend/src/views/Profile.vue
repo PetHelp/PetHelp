@@ -47,6 +47,7 @@ import Animal from '../components/Animal.vue'
 import EditableTextOutput from '../components/EditableTextOutput.vue'
 
 export default {
+  title: 'Quarantiere - Profil',
   name: 'profile-view',
   components: { Avatar, Animal, EditableTextOutput },
   data: function () {

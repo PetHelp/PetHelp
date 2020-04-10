@@ -25,6 +25,10 @@ export default new Vuex.Store({
       address: null,
       emergencyContactEmail: null,
       animals: []
+    },
+    masterdata: {
+      animalTypes: [],
+      helpTypes: []
     }
   },
   mutations: {
@@ -43,13 +47,24 @@ export default new Vuex.Store({
       state.profile.animals = animals
     },
     addAnimal (state, animal) {
-      // state.profile.animals.push(animal)
+      state.profile.animals.push(animal)
     },
     updateAnimal (state, animal) {
-      // const updateAnimal = state.profile.animals.find(element => element.id == animal.id)
+      for (var i in state.profile.animals) {
+        if (state.profile.animals[i].id === animal.id) {
+          state.profile.animals[i] = animal
+          break
+        }
+      }
     },
-    deleteAnimal (state, animal) {
-      // x
+    deleteAnimal (state, animalId) {
+      state.profile.animals = state.profile.animals.filter(a => a.id !== animalId)
+    },
+    storeAnimalTypes (state, types) {
+      state.masterdata.animalTypes = types
+    },
+    storeHelpTypes (state, types) {
+      state.masterdata.helpTypes = types
     }
   },
   actions: {
@@ -88,6 +103,17 @@ export default new Vuex.Store({
           // Vue.prototype.$flashStorage.flash('Deine eingegebenen Anmeldedaten sind nicht korrekt', 'error', messageOptions)
           console.log(error)
         })
+    },
+    attemptLogin ({ commit }) {
+      const refreshToken = localStorage.getItem('refreshToken')
+      const accessToken = localStorage.getItem('accessToken')
+      if (refreshToken && accessToken) {
+        // At a later point check if token is still valid
+        commit('authUser', {
+          refresh: refreshToken,
+          access: accessToken
+        })
+      }
     },
     refreshToken ({ state, commit }) {
       axios.post('/token/refresh', {
@@ -147,30 +173,64 @@ export default new Vuex.Store({
       axios.get('/animals/', getters.axiosConfig)
         .then(res => {
           console.log(res)
-          // commit('storeAnimals')
+          commit('storeAnimals', res.data)
         })
         .catch(error => console.log(error))
     },
     createAnimal ({ commit, getters }, animal) {
-      axios.post('/animals/', getters.axiosConfig)
+      axios.post('/animals/', {
+        type: 'DOG',
+        name: animal.name,
+        image: null,
+        description: animal.description,
+        care_person: null
+      }, getters.axiosConfig)
         .then(res => {
           console.log(res)
+          commit('addAnimal', res.data)
+          router.replace('/profil')
         })
         .catch(error => console.log(error))
     },
     updateAnimal ({ commit, getters }, animal) {
       axios.put(`/animals/${animal.id}/`, {
-
+        type: animal.type,
+        name: animal.name,
+        image: animal.image,
+        description: animal.description,
+        care_person: animal.care_person
       }, getters.axiosConfig)
         .then(res => {
           console.log(res)
+          commit('updateAnimal', res.data)
         })
         .catch(error => console.log(error))
     },
-    deleteAnimal ({ commit, getters }, animal) {
-      axios.delete(`/animals/${animal.id}/`, getters.axiosConfig)
+    deleteAnimal ({ commit, getters }, animalId) {
+      axios.delete(`/animals/${animalId}/`, getters.axiosConfig)
         .then(res => {
           console.log(res)
+          commit('deleteAnimal', animalId)
+        })
+        .catch(error => console.log(error))
+    },
+    getMasterData ({ dispatch }) {
+      dispatch('getAnimalTypes')
+      dispatch('getHelpTypes')
+    },
+    getAnimalTypes ({ commit }) {
+      axios.get('/animal-types/')
+        .then(res => {
+          console.log(res)
+          commit('storeAnimalTypes', res.data)
+        })
+        .catch(error => console.log(error))
+    },
+    getHelpTypes ({ commit }) {
+      axios.get('/help-types/')
+        .then(res => {
+          console.log(res)
+          commit('storeHelpTypes', res.data)
         })
         .catch(error => console.log(error))
     }

@@ -121,6 +121,12 @@
   </div>
 </template>
 
+<script>
+export default {
+  title: 'Quarantiere - Guideline'
+}
+</script>
+
 <style scoped>
 .wrapper {
   width: 1280px;
