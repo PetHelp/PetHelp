@@ -32,10 +32,16 @@
               v-for="animal in user.animals"
               v-bind:key="animal.id"
             >
-              <Animal v-bind:animal="animal"></Animal>
+              <router-link :to="{ name: 'editPet', params: { id: animal.id } }"><Animal v-bind:animal="animal" /></router-link>
             </b-col>
           </b-row>
         </div>
+      </b-col>
+    </b-row>
+
+    <b-row class="mt-3">
+      <b-col cols="10">
+        <router-link tag="button" to="/profil/haustier/add">Haustier hinzufügen</router-link>
       </b-col>
     </b-row>
   </div>
@@ -50,7 +56,7 @@ export default {
   title: 'Quarantiere - Profil',
   name: 'profile-view',
   components: { Avatar, Animal, EditableTextOutput },
-  data: function () {
+  data () {
     return {
       user: {
         name: 'Corinna Quarantina',
@@ -58,19 +64,16 @@ export default {
         address: 'Berlin',
         emergencyContactEmail: 'some-mail@somewhere.com',
         bio: 'Spicy jalapeno cow ribeye drumstick meatloaf. Meatball t-bone ham spare ribs, short ribs ball tip alcatra leberkas ham hock chislic landjaeger. Brisket bresaola venison, buffalo ball tip beef pastrami meatball shank flank. Pork chop leberkas frankfurter short loin chislic tenderloin drumstick pastrami kevin pork loin tail jowl pig.',
-        animals: [
-          { id: 1, name: 'T-Rex', age: 6, img: 'Hund3.jpg' },
-          { id: 2, name: 'Sumo', age: 2, img: 'Hund2.png' }
-        ],
-        test: 'hi'
+        animals: []
       }
     }
   },
-  created: function () {
+  created () {
     this.loadProfile()
+    this.loadAnimals()
   },
   methods: {
-    loadProfile: function () {
+    loadProfile () {
       if (this.$store.state.profile.id === null) {
         this.$store.dispatch('getProfile')
       }
@@ -82,7 +85,12 @@ export default {
       this.user.animals = profile.animals
       this.user.emergencyContactEmail = profile.emergencyContactEmail
     },
-    updateProfile: function () {
+    loadAnimals () {
+      this.$store.dispatch('getAnimals')
+      console.log(this.$store.state.profile.animals)
+      this.user.animals = this.$store.state.profile.animals
+    },
+    updateProfile () {
       this.$store.dispatch('updateProfile', {
         id: this.$store.state.profile.id,
         name: this.user.name,

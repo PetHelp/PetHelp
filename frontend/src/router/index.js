@@ -49,6 +49,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "addPet" */ '../views/AddAnimal.vue')
   },
   {
+    path: '/profil/haustier/:id',
+    name: 'editPet',
+    component: () => import(/* webpackChunkName: "editPet" */ '../views/EditAnimal.vue')
+  },
+  {
     path: '/login',
     name: 'login',
     component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue')

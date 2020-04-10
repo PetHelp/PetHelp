@@ -203,6 +203,7 @@ export default new Vuex.Store({
         .then(res => {
           console.log(res)
           commit('updateAnimal', res.data)
+          router.replace('/profil')
         })
         .catch(error => console.log(error))
     },
@@ -245,6 +246,9 @@ export default new Vuex.Store({
     },
     isAuthenticated (state) {
       return state.token.access !== null
+    },
+    getAnimalById: (state) => (id) => {
+      return state.profile.animals.find(a => parseInt(a.id) === parseInt(id))
     }
   },
   modules: {
