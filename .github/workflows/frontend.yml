@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install node using nvm
-        uses: dcodeIO/setup-node-nvm@v3.0.0
+        uses: dcodeIO/setup-node-nvm@v4.0.0
         with:
           node-version: 12.16.2
 
