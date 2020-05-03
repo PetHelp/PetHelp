@@ -28,6 +28,7 @@
           </b-form-group>
 
           <p class="text-center"><b-button size="lg" type="submit" :disabled=!formIsValid variant="primary">Speichern</b-button></p>
+          <p class="text-center"><b-button size="lg" type="button" v-on:click="deleteAnimal" variant="danger">Löschen</b-button></p>
         </b-form>
       </b-col>
     </b-row>
@@ -52,6 +53,9 @@ export default {
       this.animal.name = this.form.name
       this.animal.description = this.form.description
       this.$store.dispatch('updateAnimal', this.animal)
+    },
+    deleteAnimal () {
+      this.$store.dispatch('deleteAnimal', this.animal.id)
     }
   },
   computed: {

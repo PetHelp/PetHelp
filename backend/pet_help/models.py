@@ -83,6 +83,10 @@ class User(AbstractUser):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
+    @property
+    def user(self):
+        return self
+
 
 class Animal(models.Model):
     name = models.CharField(max_length=50)
@@ -93,6 +97,10 @@ class Animal(models.Model):
         User, null=True, blank=True, related_name="cared_animals", on_delete=models.SET_NULL
     )
     description = models.CharField(max_length=1024, blank=True, null=True)
+
+    @property
+    def user(self):
+        return self.owner
 
 
 class HelpRequest(models.Model):

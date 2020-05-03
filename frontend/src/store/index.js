@@ -212,6 +212,7 @@ export default new Vuex.Store({
         .then(res => {
           console.log(res)
           commit('deleteAnimal', animalId)
+          router.replace('/profil')
         })
         .catch(error => console.log(error))
     },
