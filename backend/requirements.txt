@@ -7,6 +7,6 @@ djangorestframework==3.11.0
 drf-enum-field==0.9.3
 djangorestframework_simplejwt
 geopy==1.21.0
-PyYAML==5.3.1
+PyYAML==5.4
 requests==2.23
 uritemplate==3.0.1
